@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import TeacherForm from './TeacherForm'
+import Media from 'react-bootstrap/lib/Media';
 import './App.css';
 
 class App extends Component {
@@ -8,13 +9,14 @@ class App extends Component {
     return (
      	<div className="App">
     		<div className="App-header">
-          		<div>
-          			<img src={logo} className="App-logo" alt="logo" />
-          		</div>
-          		<div>
-          			<h1>Vinnumat</h1>
-
-          		</div>
+          		<Media>
+      				<Media.Left align="top">
+        				<img src={logo} className="App-logo" alt="Image"/>
+      				</Media.Left>
+      				<Media.Body>
+        				<h1>Vinnumat</h1>
+        			</Media.Body>
+    			</Media>
         	</div>
         	<div className="mainBody">
         		<h2>Kynning</h2>
