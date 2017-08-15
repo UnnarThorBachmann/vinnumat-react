@@ -12,7 +12,7 @@ import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 **/
 class TeacherForm extends React.Component  {
 
-  
+  launaflokkar = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16'];
   state = {
     aldur: '30 ára-',
     cHluti: '0',
@@ -34,9 +34,7 @@ class TeacherForm extends React.Component  {
   handleChangeThrep = (e) => {
     this.setState({threp: e.target.value });
   }
-  handleChangeVikur = (e) => {
-    this.setState({vikur: e.target.value });
-  }
+  
   getValidationCHluti = () => {
     return isNaN(this.state.cHluti.replace(',','.')) ? 'error': 'success'
   }
@@ -51,6 +49,7 @@ class TeacherForm extends React.Component  {
           <form>
             <FormGroup
               controlId="formBasicText"
+              validationState='success'
             >
               <ControlLabel>Aldur: </ControlLabel>
               <FormControl 
@@ -66,7 +65,6 @@ class TeacherForm extends React.Component  {
                 <option value="38-54 ára">60 ára+</option>
                 <option value="38-54 ára">60 ára+ (17 tímar)</option>
               </FormControl>
-              <FormControl.Feedback />
               <HelpBlock>Fyrir rétta vinnuskyldu</HelpBlock>
             </FormGroup>
           </form>
@@ -89,34 +87,12 @@ class TeacherForm extends React.Component  {
             </FormGroup>
           </form>
         </div>
-        {/*
+       
         <div className="TeacherUnitForm">
           <form>
             <FormGroup
               controlId="formBasicText"
-            >
-            <ControlLabel>Kennsluvikur: </ControlLabel>
-            <FormControl 
-                componentClass="select" 
-                placeholder="1"
-                value={this.state.vikur}
-                onChange={this.handleChangeVikur}
-            >
-              <option value="14">14</option>
-              <option value="15">15</option>
-              <option value="16">16</option>
-              <option value="17">17</option>
-              <option value="18">18</option>
-            </FormControl>
-
-            </FormGroup>
-          </form>
-        </div>
-      */}
-        <div className="TeacherUnitForm">
-          <form>
-            <FormGroup
-              controlId="formBasicText"
+              validationState={'success'}
             >
             <ControlLabel>Launaflokkur: </ControlLabel>
             <FormControl 
@@ -125,24 +101,12 @@ class TeacherForm extends React.Component  {
                 value={this.state.launaflokkur}
                 onChange={this.handleChangeLaunaflokkur}
             >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-              <option value="11">11</option>
-              <option value="12">12</option>
-              <option value="13">13</option>
-              <option value="14">14</option>
-              <option value="15">15</option>
-              <option value="16">16</option>
+            {
+              this.launaflokkar.map((flokkur)=> 
+                  <option key={flokkur} value={flokkur}>{flokkur}</option>
+              )
+            }
             </FormControl>
-            <FormControl.Feedback />
             <HelpBlock>Ef þú villt rétta launaútreikninga.</HelpBlock>
             </FormGroup>
           </form>
@@ -151,6 +115,7 @@ class TeacherForm extends React.Component  {
           <form>
             <FormGroup
               controlId="formBasicText"
+              validationState={'success'}
             >
             <ControlLabel>Þrep: </ControlLabel>
             <FormControl 
@@ -168,7 +133,6 @@ class TeacherForm extends React.Component  {
               <option value="7">7</option>
               <option value="8">8</option>
             </FormControl>
-            <FormControl.Feedback />
             <HelpBlock>Ef þú villt rétta launaútreikninga.</HelpBlock>
             </FormGroup>
           </form>

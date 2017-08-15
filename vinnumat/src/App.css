@@ -36,6 +36,27 @@ div.TeacherUnitForm {
   width: 20%;
 }
 
+div.CourseForm {
+ 
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+div.BorderCourseForm {
+  width: 100%;
+  border: solid;
+  border-width: 0.5px;
+  padding-left: 2%; 
+  margin-top: 1%;
+}
+div.CourseUnitForm {
+  width: 12%;
+}
+
+div.CourseUnitFormMin {
+  width: 7%;
+}
+
 div.mainBody {
   padding-left: 2%;
   padding-right: 2%;
