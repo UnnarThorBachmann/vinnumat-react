@@ -19,10 +19,10 @@ class App extends Component {
     			</Media>
         	</div>
         	<div className="mainBody">
-        		<h2>Kynning</h2>
+        		{/*
         		<p className="App-intro">
           			Vinnumat kennara skiptist í A-, B- og C-hluta. Vinnumat A-hluta ræðst af vinnumati hópa sem kennari kennir. Vinnumat hópa ræðst af einingafjölda, sýnidæmi, kennslustundum (á viku), lengd kennslustundar, hópastærð og skerðingum vegna endurtekninga. Hér er einnig boðið þann möguleika að skerða vinnumat hlutfallslega (%). Útreikningar á vinnumati hvers hóps miðast við 15 vikur. Vinnumat B-hluta er 360 tímar á ári fyrir kennara í fullu starfi eða 180 tíma á misseri. C-hlutinn tekur svo til til allra annarra starfa sem kennari sinnir. Hægt er að nota síðuna til þess að reikna vinnumat stakra áfanga eða fleiri. Flestar samtölur fyrir kennara miðast við kennara í fullu starfi.
-        		</p>
+        		</p>*/}
         		<TeacherForm/>
       		</div>
       	</div>

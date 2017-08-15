@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
+import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 
 /**
 * This component was constructed by Unnar Thor Bachmann.
@@ -42,6 +43,9 @@ class TeacherForm extends React.Component  {
 
   render() {
     return (
+      <div className="BorderTeacherForm">
+        <h2>Um kennarann</h2>
+
       <div className="TeacherForm">
         <div className="TeacherUnitForm">
           <form>
@@ -60,7 +64,10 @@ class TeacherForm extends React.Component  {
                 <option value="38-54 ára">38-54 ára</option>
                 <option value="38-54 ára">55-60 ára</option>
                 <option value="38-54 ára">60 ára+</option>
+                <option value="38-54 ára">60 ára+ (17 tímar)</option>
               </FormControl>
+              <FormControl.Feedback />
+              <HelpBlock>Fyrir rétta vinnuskyldu</HelpBlock>
             </FormGroup>
           </form>
         </div>
@@ -77,10 +84,12 @@ class TeacherForm extends React.Component  {
               placeholder="0"
               onChange={this.handleChangeC}
             />
-            <FormControl.Feedback />
+             <FormControl.Feedback />
+              <HelpBlock>Allt annað en kennsla.</HelpBlock>
             </FormGroup>
           </form>
         </div>
+        {/*
         <div className="TeacherUnitForm">
           <form>
             <FormGroup
@@ -103,6 +112,7 @@ class TeacherForm extends React.Component  {
             </FormGroup>
           </form>
         </div>
+      */}
         <div className="TeacherUnitForm">
           <form>
             <FormGroup
@@ -132,7 +142,8 @@ class TeacherForm extends React.Component  {
               <option value="15">15</option>
               <option value="16">16</option>
             </FormControl>
-
+            <FormControl.Feedback />
+            <HelpBlock>Ef þú villt rétta launaútreikninga.</HelpBlock>
             </FormGroup>
           </form>
         </div>
@@ -157,9 +168,12 @@ class TeacherForm extends React.Component  {
               <option value="7">7</option>
               <option value="8">8</option>
             </FormControl>
+            <FormControl.Feedback />
+            <HelpBlock>Ef þú villt rétta launaútreikninga.</HelpBlock>
             </FormGroup>
           </form>
         </div>
+      </div>
       </div>
     );
   }
