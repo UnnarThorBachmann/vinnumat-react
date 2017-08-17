@@ -23,6 +23,7 @@ class App extends Component {
     return (
      	<div className="App">
     		<div className="App-header">
+    			{/*
           		<Media>
       				<Media.Left align="top">
         				<img src={logo} className="App-logo" alt="Image"/>
@@ -30,7 +31,12 @@ class App extends Component {
       				<Media.Body>
         				<h2>Vinnumat</h2>
         			</Media.Body>
-    			</Media>
+    			</Media>*/}
+    			<div className='left'>
+    				<img src={logo} className="App-logo" alt="Image"/>
+    				<span className="header">Vinnumat</span>
+    			</div>
+
         	</div>
         	<div className="mainBody">
         		{/*
