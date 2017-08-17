@@ -46,7 +46,7 @@ class CourseForm extends React.Component  {
     lengdKennslustunda: '40',
     hlutfall: '100',
     hopar: ['25',''],
-    disableButton: true
+    disableButton: false
   }
 
   handleChangeHeiti = (e) => {
@@ -76,7 +76,6 @@ class CourseForm extends React.Component  {
   }
 
   getButtonValidation = () => {
-
     if (this.props.disableButton) return true;
 
     let test = this.getValidationHeiti();
@@ -160,12 +159,26 @@ class CourseForm extends React.Component  {
         state.hopar = state.hopar.slice(0,state.hopar.length-1);
       return state;
     })
+
+    let invalid = false;
+
+    for (let i in this.state.hopar) {
+      if (i != index && i != this.state.hopar.length-1 && (isNaN(this.state.hopar[i]) || this.state.hopar[i].trim() === ''))
+        invalid = true; 
+    }
+    console.log('invalid',invalid);
+    console.log('isNaN',isNaN(value));
+    console.log(value.trim() === '');
+    if (invalid || isNaN(value) || value.trim() === '')
+      this.setState({disableButton: true});
+    else
+      this.setState({disableButton: false});
   }
 
   render() {
     return (
       <div className="BorderCourseForm">
-        <Button className="takki" bsStyle="success" disabled={this.getButtonValidation()}><span className="glyphicon glyphicon-plus"></span></Button>
+        <Button className="takki" bsStyle="success" disabled={this.state.disableButton && this.getButtonValidation()}><span className="glyphicon glyphicon-plus"></span></Button>
         <h4>Um áfanga</h4>
 
         <div className="CourseForm">
