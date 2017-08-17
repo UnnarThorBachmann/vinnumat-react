@@ -26,6 +26,7 @@ class TeacherForm extends React.Component  {
   }
 
   handleChangeC = (e) => {
+    this.props.changeDisableButton(e);
     this.setState({cHluti: e.target.value.replace(',','.') });
   }
   handleChangeLaunaflokkur = (e) => {
@@ -42,7 +43,7 @@ class TeacherForm extends React.Component  {
   render() {
     return (
       <div className="BorderTeacherForm">
-        <h2>Um kennarann</h2>
+        <h4>Um kennarann</h4>
 
       <div className="TeacherForm">
         <div className="TeacherUnitForm">

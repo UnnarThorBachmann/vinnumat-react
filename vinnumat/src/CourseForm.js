@@ -3,7 +3,8 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
-import HopurForm from './HopurForm'
+import HopurForm from './HopurForm';
+import Button from 'react-bootstrap/lib/Button';
 /**
 * This component was constructed by Unnar Thor Bachmann.
 * Some of the code is under heavy influence from the video
@@ -44,10 +45,12 @@ class CourseForm extends React.Component  {
     kstundirAviku: '6',
     lengdKennslustunda: '40',
     hlutfall: '100',
-    hopar: ['25','']
+    hopar: ['25',''],
+    disableButton: true
   }
 
   handleChangeHeiti = (e) => {
+  
     this.setState({heiti: e.target.value });
   }
   handleChangeEiningar = (e) => {
@@ -71,9 +74,38 @@ class CourseForm extends React.Component  {
   handleChangeHlutfall = (e) => {
     this.setState({hlutfall: e.target.value });
   }
+
+  getButtonValidation = () => {
+
+    if (this.props.disableButton) return true;
+
+    let test = this.getValidationHeiti();
+    if (test === 'error') return true;
+    
+    test = this.getValidationKstundirAviku();
+    if (test === 'error') return true;
+
+    test = this.getValidationEiningar();
+    if (test === 'error') return true;
+
+    test = this.getValidationLengdKennslustunda();
+    if (test === 'error') return true;
+
+    test = this.getValidationLengdKennslustunda();
+    if (test === 'error') return true;
+
+    test = this.getValidationHlutfall();
+    if (test === 'error') return true;
+    
+
+    return false;
+  }
+
   getValidationHeiti = () => {
+
     return (this.state.heiti.trim() === '') ? 'error': 'success';
   }
+
   getValidationKstundirAviku = () => {
     if (this.state.kstundirAviku.trim() === '')
       return 'error';
@@ -82,6 +114,7 @@ class CourseForm extends React.Component  {
     else
       return 'success';
   }
+
   getValidationEiningar = () => {
     
     if (this.state.einingar.trim() === '')
@@ -93,13 +126,6 @@ class CourseForm extends React.Component  {
 
   }
 
-  getValidationVikur = () => {
-    return 'success';
-  }
-
-  getValidationSynidaemi = () => {
-    return 'success';
-  }
 
   getValidationLengdKennslustunda = () => {
     if (this.state.lengdKennslustunda.trim() === '')
@@ -124,11 +150,7 @@ class CourseForm extends React.Component  {
   }
 
   changeHopar = (index,value) => {
-    console.log('inn');
-    console.log(value.trim() === '');
-    console.log(this.state.hopar.length === (index+2));
-
-    console.log(this.state.hopar.length === (index+2) && value.trim() === '');
+    
     this.setState((state)=>{
       
       state.hopar[index] = value;
@@ -143,7 +165,9 @@ class CourseForm extends React.Component  {
   render() {
     return (
       <div className="BorderCourseForm">
-        <h2>Um áfanga</h2>
+        <Button className="takki" bsStyle="success" disabled={this.getButtonValidation()}><span className="glyphicon glyphicon-plus"></span></Button>
+        <h4>Um áfanga</h4>
+
         <div className="CourseForm">
           <div className="CourseUnitForm">
             <form>
@@ -167,7 +191,7 @@ class CourseForm extends React.Component  {
             <form>
               <FormGroup
                 controlId="formBasicText"
-                validationState={this.getValidationVikur()}
+                validationState={'success'}
               >
                 <ControlLabel>Kennsluvikur: </ControlLabel>
                 <FormControl 
@@ -211,7 +235,7 @@ class CourseForm extends React.Component  {
             <form>
               <FormGroup
                 controlId="formBasicText"
-                validationState={this.getValidationSynidaemi()}
+                validationState={'success'}
               >
                 <ControlLabel>Sýnidæmi: </ControlLabel>
                 <FormControl 

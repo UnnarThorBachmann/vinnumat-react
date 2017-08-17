@@ -4,7 +4,8 @@
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  height: 40%;
+
 }
 
 .App-header {
@@ -60,6 +61,11 @@ div.CourseUnitFormMin {
 div.mainBody {
   padding-left: 2%;
   padding-right: 2%;
+}
+
+.takki  {
+  float: right;
+  margin: 5px
 }
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
