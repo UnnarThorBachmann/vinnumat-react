@@ -45,16 +45,17 @@ class CourseForm extends React.Component  {
     kstundirAviku: '6',
     lengdKennslustunda: '40',
     hlutfall: '100',
-    hopar: ['25',''],
-    disableButton: false
+    hopar: ['25','']
   }
 
-  handleChangeHeiti = (e) => {
-  
+  handleChangeHeiti = (e) => {  
+    console.log(this.state.hopar);  
     this.setState({heiti: e.target.value });
+    this.props.changeDisableButton(Object.assign({},this.state),'heiti',e.target.value);
   }
   handleChangeEiningar = (e) => {
     this.setState({einingar: e.target.value });
+    this.props.changeDisableButton(this.state,'einingar',e.target.value);
   }
  
   handleChangeVikur = (e) => {
@@ -67,41 +68,23 @@ class CourseForm extends React.Component  {
 
   handleChangeKstundirAviku = (e) => {
     this.setState({kstundirAviku: e.target.value });
+    this.props.changeDisableButton(this.state,'kstundirAviku',e.target.value);
+
   }
   handleChangeLengdKennslustunda = (e) => {
     this.setState({lengdKennslustunda: e.target.value });
+    this.props.changeDisableButton(this.state,'kstundirAviku',e.target.value);
+
   }
   handleChangeHlutfall = (e) => {
     this.setState({hlutfall: e.target.value });
+    this.props.changeDisableButton(this.state,'hlutfall',e.target.value);
+
   }
 
-  getButtonValidation = () => {
-    if (this.props.disableButton) return true;
-
-    let test = this.getValidationHeiti();
-    if (test === 'error') return true;
-    
-    test = this.getValidationKstundirAviku();
-    if (test === 'error') return true;
-
-    test = this.getValidationEiningar();
-    if (test === 'error') return true;
-
-    test = this.getValidationLengdKennslustunda();
-    if (test === 'error') return true;
-
-    test = this.getValidationLengdKennslustunda();
-    if (test === 'error') return true;
-
-    test = this.getValidationHlutfall();
-    if (test === 'error') return true;
-    
-
-    return false;
-  }
-
+  
   getValidationHeiti = () => {
-
+   
     return (this.state.heiti.trim() === '') ? 'error': 'success';
   }
 
@@ -160,25 +143,15 @@ class CourseForm extends React.Component  {
       return state;
     })
 
-    let invalid = false;
+    this.props.changeDisableButton(this.state,'hopar',[index,value]);
 
-    for (let i in this.state.hopar) {
-      if (i != index && i != this.state.hopar.length-1 && (isNaN(this.state.hopar[i]) || this.state.hopar[i].trim() === ''))
-        invalid = true; 
-    }
-    console.log('invalid',invalid);
-    console.log('isNaN',isNaN(value));
-    console.log(value.trim() === '');
-    if (invalid || isNaN(value) || value.trim() === '')
-      this.setState({disableButton: true});
-    else
-      this.setState({disableButton: false});
+  
   }
-
+  
   render() {
     return (
       <div className="BorderCourseForm">
-        <Button className="takki" bsStyle="success" disabled={this.state.disableButton && this.getButtonValidation()}><span className="glyphicon glyphicon-plus"></span></Button>
+        <Button className="takki" bsStyle="success" disabled={this.props.disable}><span className="glyphicon glyphicon-plus"></span></Button>
         <h4>Um áfanga</h4>
 
         <div className="CourseForm">

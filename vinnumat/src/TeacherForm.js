@@ -26,8 +26,9 @@ class TeacherForm extends React.Component  {
   }
 
   handleChangeC = (e) => {
-    this.props.changeDisableButton(e);
     this.setState({cHluti: e.target.value.replace(',','.') });
+    this.props.changeDisableButton(this.state,'cHluti',e.target.value);
+
   }
   handleChangeLaunaflokkur = (e) => {
     this.setState({launaflokkur: e.target.value });
@@ -37,7 +38,7 @@ class TeacherForm extends React.Component  {
   }
   
   getValidationCHluti = () => {
-    return isNaN(this.state.cHluti.replace(',','.')) ? 'error': 'success'
+    return (isNaN(this.state.cHluti.replace(',','.')) || this.state.cHluti.trim() === '')? 'error': 'success'
   }
 
   render() {
@@ -80,7 +81,7 @@ class TeacherForm extends React.Component  {
             <FormControl
               type="text"
               value={this.state.cHluti}
-              placeholder="0"
+              placeholder={this.state.cHluti}
               onChange={this.handleChangeC}
             />
              <FormControl.Feedback />
