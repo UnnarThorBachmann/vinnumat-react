@@ -296,7 +296,7 @@ class CourseForm extends React.Component  {
           </div>
           <div className="CourseUnitForm">
             <form>
-              <ControlLabel>Hópar: </ControlLabel>
+              <ControlLabel style={{color: '#3c763d'}}>Hópar: </ControlLabel>
               {
                 this.state.hopar.map((fjoldi,i) => <HopurForm key={i} index={i} fjoldi={fjoldi} change={this.changeHopar} end={i === (this.state.hopar.length-1)}/>)
               }

@@ -12,7 +12,10 @@ class App extends Component {
   }
 
   changeDisableButton= (state,changedProp, value) => {
-  	
+  	console.log('state',state);
+  	console.log('changedProp',changedProp);
+  	console.log('value',value);
+
   	if (changedProp === 'cHluti') {
   		if (isNaN(value) || value.trim() === '')
   			this.setState({disableTeacher: true});
@@ -51,14 +54,21 @@ class App extends Component {
   		if (changedProp === 'hopar') {
   			let groups = state['hopar'];
   			groups[value[0]] = value[1];
+  			groups = groups.slice(0,groups.length-1);
+  			console.log('groups',groups);
+  			if (groups[groups.length-1] === '')
+  				groups = groups.slice(0,groups.length-1);
+
   			for (let hopur of groups) {
   				if (isNaN(hopur.replace(',','.')) || hopur === '' || parseFloat(hopur.replace(',','.'))< 0) {
   					this.setState({disableCourse: true}); 
-  					disabled= true;		
+  					disabled= true;
+  					console.log('prump');
+  					console.log('hopur',hopur);		
   				}
   			}
   		}
-
+  		console.log('disabled',disabled);
   		if (!disabled) 
   			this.setState({disableCourse: false});
 
