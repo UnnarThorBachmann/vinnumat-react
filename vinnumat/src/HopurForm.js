@@ -42,7 +42,7 @@ class HopurForm extends React.Component  {
           />
           <FormControl.Feedback />
           {this.props.end && 
-              <HelpBlock>Er alltaf auður</HelpBlock>            
+              <HelpBlock>Fjöldi hópa: {this.props.size-1}</HelpBlock>            
           }
           </FormGroup>
 
