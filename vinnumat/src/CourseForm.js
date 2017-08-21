@@ -49,7 +49,6 @@ class CourseForm extends React.Component  {
   }
 
   handleChangeHeiti = (e) => {  
-    console.log(this.state.hopar);  
     this.setState({heiti: e.target.value });
     this.props.changeDisableButton(Object.assign({},this.state),'heiti',e.target.value);
   }
@@ -147,11 +146,13 @@ class CourseForm extends React.Component  {
 
   
   }
-  
+  add =(e)=> {
+    this.props.add(this.state);
+  }
   render() {
     return (
       <div className="BorderCourseForm">
-        <Button className="takki" bsStyle="success" disabled={this.props.disable}><span className="glyphicon glyphicon-plus"></span></Button>
+        <Button className="takki" bsStyle="success" disabled={this.props.disable} onClick={this.add}><span className="glyphicon glyphicon-plus"></span></Button>
         <h4>Um áfanga</h4>
 
         <div className="CourseForm">
@@ -193,7 +194,7 @@ class CourseForm extends React.Component  {
                   )
                 }
                 </FormControl>
-                <HelpBlock>15 vikur skv. sýnidæmum</HelpBlock>
+                <HelpBlock>15 vikur í sýnidæmum</HelpBlock>
               </FormGroup>
             </form>
           </div>
@@ -213,7 +214,7 @@ class CourseForm extends React.Component  {
               </FormControl>
 
               <FormControl.Feedback />
-              <HelpBlock><strong>5 feiningar oftast 3 einingar</strong></HelpBlock>
+              <HelpBlock><strong>5f oftast 3e</strong></HelpBlock>
               </FormGroup>
             </form>
           </div>

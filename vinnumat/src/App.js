@@ -4,6 +4,7 @@ import TeacherForm from './TeacherForm'
 import CourseForm from './CourseForm'
 import Media from 'react-bootstrap/lib/Media';
 import './App.css';
+import Afangi from './afangi.js';
 
 class App extends Component {
 
@@ -11,10 +12,14 @@ class App extends Component {
   			disableCourse: true
   }
 
+  add = (state) => {
+  	let afangi = new Afangi(state);
+  	afangi.vinnumat();
+  	
+  }
+
   changeDisableButton= (state,changedProp, value) => {
-  	console.log('state',state);
-  	console.log('changedProp',changedProp);
-  	console.log('value',value);
+  	
 
   	if (changedProp === 'cHluti') {
   		if (isNaN(value) || value.trim() === '')
@@ -55,20 +60,23 @@ class App extends Component {
   			let groups = state['hopar'];
   			groups[value[0]] = value[1];
   			groups = groups.slice(0,groups.length-1);
-  			console.log('groups',groups);
+
   			if (groups[groups.length-1] === '')
   				groups = groups.slice(0,groups.length-1);
+
+  			if (groups.length === 0) {
+  				this.setState({disableCourse: true}); 
+  				disabled= true;
+  			}
 
   			for (let hopur of groups) {
   				if (isNaN(hopur.replace(',','.')) || hopur === '' || parseFloat(hopur.replace(',','.'))< 0) {
   					this.setState({disableCourse: true}); 
   					disabled= true;
-  					console.log('prump');
-  					console.log('hopur',hopur);		
+  						
   				}
   			}
   		}
-  		console.log('disabled',disabled);
   		if (!disabled) 
   			this.setState({disableCourse: false});
 
@@ -94,7 +102,7 @@ class App extends Component {
           			Vinnumat kennara skiptist í A-, B- og C-hluta. Vinnumat A-hluta ræðst af vinnumati hópa sem kennari kennir. Vinnumat hópa ræðst af einingafjölda, sýnidæmi, kennslustundum (á viku), lengd kennslustundar, hópastærð og skerðingum vegna endurtekninga. Hér er einnig boðið þann möguleika að skerða vinnumat hlutfallslega (%). Útreikningar á vinnumati hvers hóps miðast við 15 vikur. Vinnumat B-hluta er 360 tímar á ári fyrir kennara í fullu starfi eða 180 tíma á misseri. C-hlutinn tekur svo til til allra annarra starfa sem kennari sinnir. Hægt er að nota síðuna til þess að reikna vinnumat stakra áfanga eða fleiri. Flestar samtölur fyrir kennara miðast við kennara í fullu starfi.
         		</p>*/}
         		<TeacherForm changeDisableButton={this.changeDisableButton}/>
-        		<CourseForm changeDisableButton={this.changeDisableButton} disable={this.state.disableTeacher || this.state.disableCourse}/>
+        		<CourseForm changeDisableButton={this.changeDisableButton} add={this.add} disable={this.state.disableTeacher || this.state.disableCourse}/>
       		</div>
       	</div>
     );
