@@ -85,7 +85,7 @@ class TeacherForm extends React.Component  {
               onChange={this.handleChangeC}
             />
              <FormControl.Feedback />
-              <HelpBlock>Allt annað en kennsla.</HelpBlock>
+              <HelpBlock>Önnur vinna en kennsla.</HelpBlock>
             </FormGroup>
           </form>
         </div>
@@ -109,7 +109,7 @@ class TeacherForm extends React.Component  {
               )
             }
             </FormControl>
-            <HelpBlock>Ef þú villt rétta launaútreikninga.</HelpBlock>
+            <HelpBlock>Fyrir rétta launaútreikninga.</HelpBlock>
             </FormGroup>
           </form>
         </div>
@@ -135,7 +135,7 @@ class TeacherForm extends React.Component  {
               <option value="7">7</option>
               <option value="8">8</option>
             </FormControl>
-            <HelpBlock>Ef þú villt rétta launaútreikninga.</HelpBlock>
+            <HelpBlock>Fyrir rétta launaútreikninga.</HelpBlock>
             </FormGroup>
           </form>
         </div>

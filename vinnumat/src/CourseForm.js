@@ -254,7 +254,7 @@ class CourseForm extends React.Component  {
                 onChange={this.handleChangeKstundirAviku}
               />
               <FormControl.Feedback />
-              <HelpBlock>Á viku</HelpBlock>
+              <HelpBlock>á viku</HelpBlock>
 
               </FormGroup>
             </form>
@@ -273,7 +273,7 @@ class CourseForm extends React.Component  {
                 onChange={this.handleChangeLengdKennslustunda}
               />
               <FormControl.Feedback />
-              <HelpBlock>Í mínútum</HelpBlock>
+              <HelpBlock>í mínútum</HelpBlock>
               </FormGroup>
             </form>
           </div>
