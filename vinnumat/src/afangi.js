@@ -50,14 +50,37 @@ class Afangi {
 
 	}
 
-	vinnumat() {
-		console.log('Vikur',this.vikur);
-		console.log('Einingar',this.einingar);
-		console.log('Fjöldi kennslustunda á viku',this.kstundirAviku);
-		console.log('Lengd kennslustunda', this.lengdKennslustunda);
-		console.log('Hópar',this.hopar);
-		console.log('Sýnidæmi',this.synidaemi);
+	discount(hopar) {
+		if (hopar.length === 1)
+			return hopar;
 
+		let heildarfjoldi = 0;
+		for (let hopur of hopar) {
+			heildarfjoldi += hopur.fjoldi;
+		}	
+		let medaltal = parseFloat(heildarfjoldi/(hopar.length));
+		let vinnumat_skuggi = hopar[0].vinna_stadin 
+							  + hopar[0].vinna_undirbuningur
+							  + hopar[0].vinna_fastur;
+		vinnumat_skuggi += this.vinna_vegna_nemenda(medaltal);
+		let n = hopar.length;
+		let skerdingarprosenta;
+		
+		if (n  <= 3)
+			skerdingarprosenta = 0.08*(n-1)/n;
+		else
+			skerdingarprosenta = 0.08*(n-2)/n;
+
+		for (let hopur of hopar) {
+			hopur.skerdingarprosenta = skerdingarprosenta;
+			hopur.skerding = vinnumat_skuggi*skerdingarprosenta;
+			hopur.vinnumat = hopur.vinnumat - hopur.skerding;
+		}
+		return hopar
+	}
+
+	vinnumat() {
+		
 
 		this.stadin_kennsla = parseFloat(this.vikur*this.kstundirAviku*this.lengdKennslustunda)/parseFloat(60);
 		this.undirbuningur = parseFloat(this.vikur*this.kstundirAviku*this.lengdKennslustunda)/parseFloat(40)*parseFloat(20)/parseFloat(60);
@@ -73,11 +96,12 @@ class Afangi {
 				'vinna_undirbuningur': this.undirbuningur,
 				'vinna_fastur': this.fastur,
 				'vinna_vegan_nemenda': this.vinna_vegna_nemenda(fjoldi),
-				'vinnumat': this.stadin_kennsla + this.undirbuningur + this.fastur + this.vinna_vegna_nemenda(fjoldi)
+				'vinnumat': this.stadin_kennsla + this.undirbuningur + this.fastur + this.vinna_vegna_nemenda(fjoldi),
+				'fjoldi': fjoldi
 			});
 			i += 1;
 		}
-		
+		vinnumat_hopa = this.discount(vinnumat_hopa);
 		return vinnumat_hopa;
 	}
 }

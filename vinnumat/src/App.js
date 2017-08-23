@@ -5,17 +5,19 @@ import CourseForm from './CourseForm'
 import Media from 'react-bootstrap/lib/Media';
 import './App.css';
 import Afangi from './afangi.js';
+import AfangiComponent from './afangiComponent';
 
 class App extends Component {
 
   state = {disableTeacher: false,
-  			disableCourse: true
+  			disableCourse: true,
+  			teacher: {afangar: []}
   }
 
   add = (state) => {
   	let afangi = new Afangi(state);
-  	console.log('Vinnumat', afangi.vinnumat());
-  	
+  	this.setState((state) => {teacher: {afangar: this.state.teacher.afangar.push(afangi.vinnumat())}});
+  	console.log(this.state.teacher.afangar);
   }
 
   changeDisableButton= (state,changedProp, value) => {
@@ -103,6 +105,9 @@ class App extends Component {
         		</p>*/}
         		<TeacherForm changeDisableButton={this.changeDisableButton}/>
         		<CourseForm changeDisableButton={this.changeDisableButton} add={this.add} disable={this.state.disableTeacher || this.state.disableCourse}/>
+      			{
+      				this.state.teacher.afangar.map((i,afangi)=> <AfangiComponent/>)
+      			}
       		</div>
       	</div>
     );
