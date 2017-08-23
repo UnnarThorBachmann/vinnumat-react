@@ -19,8 +19,35 @@ class Afangi {
 	}
 
 	vinna_vegna_nemenda(nemfjoldi) {
-		if (nemfjoldi < this.synidaemi.lagmark)
-			return this.synidaemi.lagmark*this.vinna_per_nemanda/parseFloat(60);
+		let alag_20 = this.synidaemi.kostn_per_nem_yn;
+		let alag_100 = this.synidaemi.kostn_per_nem_ye;
+		let lagmark = this.synidaemi.lagmark;
+		let hamark_e = this.synidaemi.hamark_e;
+		let hamark_n = this.synidaemi.hamark_n;
+		let vinna_per_nemanda = this.synidaemi.vinna_per_nemanda;
+
+		let vinnumat = 0;
+
+		if (nemfjoldi-hamark_e > 0) {
+			vinnumat += (nemfjoldi-hamark_e)*alag_100;
+			nemfjoldi = hamark_e;
+		}
+
+		if (nemfjoldi-hamark_n > 0 ) {
+			vinnumat += (nemfjoldi-hamark_n)*alag_20;
+			nemfjoldi = hamark_n;
+		}
+
+		if (nemfjoldi-lagmark > 0 ) {
+			vinnumat += (nemfjoldi-lagmark)*vinna_per_nemanda/60;
+			
+		}
+
+		nemfjoldi = lagmark;
+		vinnumat += lagmark*vinna_per_nemanda/60;
+
+		return vinnumat;
+
 	}
 
 	vinnumat() {
@@ -36,16 +63,22 @@ class Afangi {
 		this.undirbuningur = parseFloat(this.vikur*this.kstundirAviku*this.lengdKennslustunda)/parseFloat(40)*parseFloat(20)/parseFloat(60);
 		this.fastur = this.synidaemi['onnur_vinna'] 
 					  + this.synidaemi['timar_namsAetlun'] 
-					  + this.synidaemi['undirb_kennslu'] 
 					  + this.synidaemi['verkefnisgerd'];
-		const fj = this.hopar[0];
-		this.vinna_vegna_nemenda(fj);
 
-		console.log(this.stadin_kennsla);
-		console.log(this.undirbuningur);
-		console.log(this.fastur);
-
-		return 0;
+		let vinnumat_hopa = [];
+		let i = 1;
+		for (let fjoldi of this.hopar) {
+			vinnumat_hopa.push({'hopur': i,
+				'vinna_stadin': this.stadin_kennsla,
+				'vinna_undirbuningur': this.undirbuningur,
+				'vinna_fastur': this.fastur,
+				'vinna_vegan_nemenda': this.vinna_vegna_nemenda(fjoldi),
+				'vinnumat': this.stadin_kennsla + this.undirbuningur + this.fastur + this.vinna_vegna_nemenda(fjoldi)
+			});
+			i += 1;
+		}
+		
+		return vinnumat_hopa;
 	}
 }
 

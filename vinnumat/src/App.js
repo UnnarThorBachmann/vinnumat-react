@@ -14,7 +14,7 @@ class App extends Component {
 
   add = (state) => {
   	let afangi = new Afangi(state);
-  	afangi.vinnumat();
+  	console.log('Vinnumat', afangi.vinnumat());
   	
   }
 
