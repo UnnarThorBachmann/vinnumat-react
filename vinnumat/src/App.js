@@ -11,12 +11,14 @@ class App extends Component {
 
   state = {disableTeacher: false,
   			disableCourse: true,
-  			teacher: {afangar: []}
+  			teacher: {afangar: new Map()}
   }
 
   add = (state) => {
   	let afangi = new Afangi(state);
-  	this.setState((state) => {teacher: {afangar: this.state.teacher.afangar.push(afangi.vinnumat())}});
+  	let afangi_nidurstodur = afangi.vinnumat();
+  	this.setState((state) => {teacher: {afangar: this.state.teacher.afangar.set(afangi_nidurstodur.heiti,afangi_nidurstodur)}});
+  	console.log(afangi.vinnumat());
   	console.log(this.state.teacher.afangar);
   }
 
@@ -106,7 +108,9 @@ class App extends Component {
         		<TeacherForm changeDisableButton={this.changeDisableButton}/>
         		<CourseForm changeDisableButton={this.changeDisableButton} add={this.add} disable={this.state.disableTeacher || this.state.disableCourse}/>
       			{
-      				this.state.teacher.afangar.map((i,afangi)=> <AfangiComponent/>)
+      				
+      				[...this.state.teacher.afangar.values()].map((afangi)=> <AfangiComponent key={afangi.heiti} afangi={afangi}/>)
+      				
       			}
       		</div>
       	</div>

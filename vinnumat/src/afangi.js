@@ -102,7 +102,19 @@ class Afangi {
 			i += 1;
 		}
 		vinnumat_hopa = this.discount(vinnumat_hopa);
-		return vinnumat_hopa;
+		let afangi = {};
+		afangi.heiti = this.heiti;
+		afangi.heiti = this.heiti;
+		afangi.vikur = this.vikur; 
+		afangi.einingar = this.einingar; 
+		afangi.hlutfall = this.hlutfall; 
+		afangi.kstundirAviku = this.kstundirAviku; 
+		afangi.lengdKennslustunda = this.lengdKennslustunda; 
+		afangi.synidaemiHeiti = this.synidaemi.heiti;
+		afangi.stadin_kennsla = this.stadin_kennsla;
+		afangi.undirbuningur = this.undirbuningur;
+		afangi.vinnumat_hopa = vinnumat_hopa
+		return afangi;
 	}
 }
 
