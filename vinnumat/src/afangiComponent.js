@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
+import ListGroup from 'react-bootstrap/lib/ListGroup';
+import ListGroupItem from 'react-bootstrap/lib/ListGroupItem';
 
-import Well from 'react-bootstrap/lib/Well';
 
 class AfangiComponent extends React.Component  {
 
 	render() {
 		console.log(this.props.afangi);
     	return (
-    		<div>
-    			<Well>
-    				<h2>{this.props.afangi.heiti}</h2>
-    			</Well>
+    		<div className="nidurstadaAfanga">
+    			<h4>Heiti:{this.props.afangi.heiti}</h4>
+    			<ListGroup>
+    				<ListGroupItem>Einingar: {this.props.afangi.einingar}</ListGroupItem>
+    			</ListGroup>
     		</div>
     	)
 

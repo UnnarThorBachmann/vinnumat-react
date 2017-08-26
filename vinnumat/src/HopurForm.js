@@ -14,10 +14,13 @@ class HopurForm extends React.Component  {
   state = {fjoldi: this.props.fjoldi}
 
   getValidationFjoldi = () => {
+    
     if (this.state.fjoldi.trim() === '' && !this.props.end)
       return 'error';
     else if (isNaN(this.state.fjoldi.trim().replace(',','.')))
       return 'error'
+    else if (this.props.end)
+      return null;
     else
       return 'success';
 
@@ -42,7 +45,7 @@ class HopurForm extends React.Component  {
           />
           <FormControl.Feedback />
           {this.props.end && 
-              <HelpBlock>Fjöldi hópa: {this.props.size-1}</HelpBlock>            
+              <HelpBlock><strong>Fjöldi hópa: {this.props.size-1}</strong></HelpBlock>            
           }
           </FormGroup>
 

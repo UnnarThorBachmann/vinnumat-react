@@ -71,9 +71,15 @@ div.mainBody {
 
 .takki  {
   float: right;
-  margin: 5px
+  margin: 5px;
 }
 
+.nidurstadaAfanga {
+  border-style: solid;
+  border-width: 1px;
+  padding: 1%;
+  margin: 1%;
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

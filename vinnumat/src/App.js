@@ -63,7 +63,7 @@ class App extends Component {
   		if (changedProp === 'hopar') {
   			let groups = state['hopar'];
   			groups[value[0]] = value[1];
-  			groups = groups.slice(0,groups.length-1);
+  			groups = groups.slice(0,groups.length);
 
   			if (groups[groups.length-1] === '')
   				groups = groups.slice(0,groups.length-1);

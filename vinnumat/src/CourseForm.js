@@ -146,9 +146,11 @@ class CourseForm extends React.Component  {
 
   
   }
+  
   add =(e)=> {
     this.props.add(this.state);
   }
+
   render() {
     return (
       <div className="BorderCourseForm">
