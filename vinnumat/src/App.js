@@ -6,6 +6,9 @@ import Media from 'react-bootstrap/lib/Media';
 import './App.css';
 import Afangi from './afangi.js';
 import AfangiComponent from './afangiComponent';
+import Tab from 'react-bootstrap/lib/Tab';
+import Tabs from 'react-bootstrap/lib/Tabs';
+
 
 class App extends Component {
 
@@ -18,8 +21,7 @@ class App extends Component {
   	let afangi = new Afangi(state);
   	let afangi_nidurstodur = afangi.vinnumat();
   	this.setState((state) => {teacher: {afangar: this.state.teacher.afangar.set(afangi_nidurstodur.heiti,afangi_nidurstodur)}});
-  	console.log(afangi.vinnumat());
-  	console.log(this.state.teacher.afangar);
+  	
   }
 
   changeDisableButton= (state,changedProp, value) => {
@@ -101,17 +103,22 @@ class App extends Component {
 
         	</div>
         	<div className="mainBody">
-        		{/*
-        		<p className="App-intro">
-          			Vinnumat kennara skiptist í A-, B- og C-hluta. Vinnumat A-hluta ræðst af vinnumati hópa sem kennari kennir. Vinnumat hópa ræðst af einingafjölda, sýnidæmi, kennslustundum (á viku), lengd kennslustundar, hópastærð og skerðingum vegna endurtekninga. Hér er einnig boðið þann möguleika að skerða vinnumat hlutfallslega (%). Útreikningar á vinnumati hvers hóps miðast við 15 vikur. Vinnumat B-hluta er 360 tímar á ári fyrir kennara í fullu starfi eða 180 tíma á misseri. C-hlutinn tekur svo til til allra annarra starfa sem kennari sinnir. Hægt er að nota síðuna til þess að reikna vinnumat stakra áfanga eða fleiri. Flestar samtölur fyrir kennara miðast við kennara í fullu starfi.
-        		</p>*/}
-        		<TeacherForm changeDisableButton={this.changeDisableButton}/>
-        		<CourseForm changeDisableButton={this.changeDisableButton} add={this.add} disable={this.state.disableTeacher || this.state.disableCourse}/>
-      			{
+        		<Tabs defaultActiveKey={1}>
+    				<Tab eventKey={1} title="Um kennarann">
+    					<TeacherForm changeDisableButton={this.changeDisableButton}/>
+					</Tab>
+    				<Tab eventKey={2} title="Bæta við áfanga">
+        				<CourseForm changeDisableButton={this.changeDisableButton} add={this.add} disable={this.state.disableTeacher || this.state.disableCourse}/>
+    				</Tab>
+    				<Tab eventKey={3} title="Niðurstöður">
+    					{
       				
-      				[...this.state.teacher.afangar.values()].map((afangi)=> <AfangiComponent key={afangi.heiti} afangi={afangi}/>)
+      						[...this.state.teacher.afangar.values()].map((afangi)=> <AfangiComponent key={afangi.heiti} afangi={afangi}/>)
       				
-      			}
+      					}
+    				</Tab>
+  				</Tabs>
+      			
       		</div>
       	</div>
     );

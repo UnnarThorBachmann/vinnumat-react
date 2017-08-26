@@ -16,6 +16,7 @@ class Afangi {
 
 		this.stadin_kennsla = 0;
 		this.undirbuningur = 0;
+		this.fastur = 0;
 	}
 
 	vinna_vegna_nemenda(nemfjoldi) {
@@ -84,9 +85,7 @@ class Afangi {
 
 		this.stadin_kennsla = parseFloat(this.vikur*this.kstundirAviku*this.lengdKennslustunda)/parseFloat(60);
 		this.undirbuningur = parseFloat(this.vikur*this.kstundirAviku*this.lengdKennslustunda)/parseFloat(40)*parseFloat(20)/parseFloat(60);
-		this.fastur = this.synidaemi['onnur_vinna'] 
-					  + this.synidaemi['timar_namsAetlun'] 
-					  + this.synidaemi['verkefnisgerd'];
+		this.fastur = this.synidaemi['onnur_vinna'] + this.synidaemi['timar_namsAetlun'] + this.synidaemi['verkefnisgerd'];
 
 		let vinnumat_hopa = [];
 		let i = 1;
@@ -95,7 +94,7 @@ class Afangi {
 				'vinna_stadin': this.stadin_kennsla,
 				'vinna_undirbuningur': this.undirbuningur,
 				'vinna_fastur': this.fastur,
-				'vinna_vegan_nemenda': this.vinna_vegna_nemenda(fjoldi),
+				'vinna_vegna_nemenda': this.vinna_vegna_nemenda(fjoldi),
 				'vinnumat': this.stadin_kennsla + this.undirbuningur + this.fastur + this.vinna_vegna_nemenda(fjoldi),
 				'fjoldi': fjoldi
 			});
@@ -103,7 +102,6 @@ class Afangi {
 		}
 		vinnumat_hopa = this.discount(vinnumat_hopa);
 		let afangi = {};
-		afangi.heiti = this.heiti;
 		afangi.heiti = this.heiti;
 		afangi.vikur = this.vikur; 
 		afangi.einingar = this.einingar; 
