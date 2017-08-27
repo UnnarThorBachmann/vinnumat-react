@@ -12,7 +12,8 @@ import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 **/
 class TeacherForm extends React.Component  {
 
-  launaflokkar = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16'];
+  launaflokkar = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16']
+  threp = ['0','1','2','3','4','5','6','7','8']
   state = {
     aldur: '30 ára-',
     cHluti: '0',
@@ -122,18 +123,13 @@ class TeacherForm extends React.Component  {
             <ControlLabel>Þrep: </ControlLabel>
             <FormControl 
                 componentClass="select" 
-                placeholder="1"
+                placeholder="0"
                 value={this.state.threp}
                 onChange={this.handleChangeThrep}
             >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
+            {
+              this.threp.map((threp)=><option key={threp} value="{threp}">{threp}</option>)
+            }
             </FormControl>
             <HelpBlock>Fyrir rétta launaútreikninga.</HelpBlock>
             </FormGroup>

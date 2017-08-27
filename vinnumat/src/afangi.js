@@ -10,6 +10,7 @@ class Afangi {
 		this.kstundirAviku = parseFloat(info_object.kstundirAviku);
 		this.lengdKennslustunda = parseFloat(info_object.lengdKennslustunda);
 		this.synidaemi = Synidaemi[info_object.synidaemi];
+		this.undirb_kennslu = this.synidaemi.undirb_kennslu;
 		this.hopar = []
 		for (let hopur in info_object.hopar.slice(0,info_object.hopar.length-1))
 			this.hopar.push(parseFloat(info_object.hopar[hopur]));
@@ -84,7 +85,7 @@ class Afangi {
 		
 
 		this.stadin_kennsla = parseFloat(this.vikur*this.kstundirAviku*this.lengdKennslustunda)/parseFloat(60);
-		this.undirbuningur = parseFloat(this.vikur*this.kstundirAviku*this.lengdKennslustunda)/parseFloat(40)*parseFloat(20)/parseFloat(60);
+		this.undirbuningur = parseFloat(this.vikur*this.kstundirAviku*this.lengdKennslustunda)/parseFloat(40)*parseFloat(this.undirb_kennslu)/parseFloat(60);
 		this.fastur = this.synidaemi['onnur_vinna'] + this.synidaemi['timar_namsAetlun'] + this.synidaemi['verkefnisgerd'];
 
 		let vinnumat_hopa = [];
