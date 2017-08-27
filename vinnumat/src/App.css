@@ -26,6 +26,20 @@
   font-size: 20px;
 }
 
+takki-min {
+  float: right;
+}
+
+hlutfall-gildi {
+  margin: 1%;
+}
+
+.hlutfallsbord {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+}
 div.TeacherForm {
  
   display: flex;

@@ -17,6 +17,23 @@ class App extends Component {
   			teacher: {afangar: new Map()}
   }
 
+  changeHlutfall = (gildi,heiti,nr) => {
+  	console.log('gildi',gildi);
+  	console.log('heiti',heiti);
+  	console.log('nr',nr);
+  	let afangi_change = this.state.teacher.afangar.get(heiti);
+  	afangi_change.vinnumat_hopa[parseInt(nr-1)].hlutfall = parseInt(gildi);
+	afangi_change.vinnumat_hopa[parseInt(nr-1)].fradrattur = parseFloat(afangi_change.vinnumat_hopa[parseInt(nr-1)].vinnumat)*(100-parseFloat(gildi))/100;
+  	afangi_change.vinnumat_hopa[parseInt(nr-1)].vinnumat_skert = parseFloat(afangi_change.vinnumat_hopa[parseInt(nr-1)].vinnumat) - parseFloat(afangi_change.vinnumat_hopa[parseInt(nr-1)].fradrattur);
+  	
+  	//afangi_change.vinnumat_hopa[parseInt(nr-1)].vinnumat = afangi_change.vinnumat_hopa[parseInt(nr-1)].vinnumat;
+  	
+  	this.setState(state => {
+  		state.teacher.afangar.set(heiti,afangi_change);
+  		return {teacher: {afangar: state.teacher.afangar}};
+  	})
+
+  }
   add = (state) => {
   	let afangi = new Afangi(state);
   	let afangi_nidurstodur = afangi.vinnumat();
@@ -50,12 +67,7 @@ class App extends Component {
   				this.setState({disableCourse: true}); 
   				disabled= true;
   			}
-  			else if (prop === 'hlutfall' && (val ==='' || isNaN(val.replace(',','.')) 
-  													   || parseFloat(val.replace(',','.'))<0 
-  													   || parseFloat(val.replace(',','.'))> 100)) {
-  				this.setState({disableCourse: true}); 
-  				disabled= true;
-  			}
+  			
   			else if (prop === 'lengdKennslustunda' && (val ==='' || isNaN(val.replace(',','.')))) {
   				this.setState({disableCourse: true}); 
   				disabled= true;
@@ -113,7 +125,7 @@ class App extends Component {
     				<Tab eventKey={3} title="Niðurstöður">
     					{
       				
-      						[...this.state.teacher.afangar.values()].map((afangi)=> <AfangiComponent key={afangi.heiti} afangi={afangi}/>)
+      						[...this.state.teacher.afangar.values()].map((afangi)=> <AfangiComponent key={afangi.heiti} afangi={afangi} changeHlutfall={this.changeHlutfall}/>)
       				
       					}
     				</Tab>

@@ -11,10 +11,11 @@ import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 **/
 class HopurForm extends React.Component  {
 
-  state = {fjoldi: this.props.fjoldi}
+  state = {fjoldi: this.props.fjoldi,
+            hlutfall: this.props.hlutfall
+          }
 
   getValidationFjoldi = () => {
-    
     if (this.state.fjoldi.trim() === '' && !this.props.end)
       return 'error';
     else if (isNaN(this.state.fjoldi.trim().replace(',','.')))

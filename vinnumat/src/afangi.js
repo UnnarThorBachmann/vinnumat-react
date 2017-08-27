@@ -6,11 +6,9 @@ class Afangi {
 		this.heiti = info_object.heiti;
 		this.vikur = parseFloat(info_object.vikur.replace(',','.'));
 		this.einingar = parseFloat(info_object.einingar.replace(',','.'));
-		this.hlutfall = parseFloat(info_object.hlutfall.replace(',','.'));
 		this.kstundirAviku = parseFloat(info_object.kstundirAviku.replace(',','.'));
 		this.lengdKennslustunda = parseFloat(info_object.lengdKennslustunda.replace(',','.'));
 		this.synidaemi = Synidaemi[info_object.synidaemi];
-		this.undirb_kennslu = this.synidaemi.undirb_kennslu;
 		this.hopar = []
 		for (let hopur in info_object.hopar.slice(0,info_object.hopar.length-1))
 			this.hopar.push(parseFloat(info_object.hopar[hopur].replace(',','.')));
@@ -79,7 +77,6 @@ class Afangi {
 			hopur.skerding = vinnumat_skuggi*skerdingarprosenta;
 			hopur.vinnumat = hopur.vinnumat - hopur.skerding;
 		}
-		console.log('vinnumat skugga',vinnumat_skuggi);
 		
 		return hopar
 	}
@@ -88,7 +85,7 @@ class Afangi {
 		
 
 		this.stadin_kennsla = parseFloat(this.vikur*this.kstundirAviku*this.lengdKennslustunda)/parseFloat(60);
-		this.undirbuningur = parseFloat(this.vikur*this.kstundirAviku*this.lengdKennslustunda)/parseFloat(40)*parseFloat(this.undirb_kennslu)/parseFloat(60);
+		this.undirbuningur = parseFloat(this.vikur*this.kstundirAviku*this.lengdKennslustunda)/parseFloat(40)*parseFloat(this.synidaemi.undirb_kennslu)/parseFloat(60);
 		this.fastur = this.synidaemi['onnur_vinna'] + this.synidaemi['timar_namsAetlun'] + this.synidaemi['verkefnisgerd'];
 
 		let vinnumat_hopa = [];
@@ -100,7 +97,9 @@ class Afangi {
 				'vinna_fastur': this.fastur,
 				'vinna_vegna_nemenda': this.vinna_vegna_nemenda(fjoldi),
 				'vinnumat': this.stadin_kennsla + this.undirbuningur + this.fastur + this.vinna_vegna_nemenda(fjoldi),
-				'fjoldi': fjoldi
+				'vinnumat_skert': this.stadin_kennsla + this.undirbuningur + this.fastur + this.vinna_vegna_nemenda(fjoldi),
+				'fjoldi': fjoldi,
+				'hlutfall': 100
 			});
 			i += 1;
 		}
@@ -109,13 +108,12 @@ class Afangi {
 		afangi.heiti = this.heiti;
 		afangi.vikur = this.vikur; 
 		afangi.einingar = this.einingar; 
-		afangi.hlutfall = this.hlutfall; 
 		afangi.kstundirAviku = this.kstundirAviku; 
 		afangi.lengdKennslustunda = this.lengdKennslustunda; 
 		afangi.synidaemiHeiti = this.synidaemi.heiti;
-		afangi.stadin_kennsla = this.stadin_kennsla;
-		afangi.undirbuningur = this.undirbuningur;
-		afangi.vinnumat_hopa = vinnumat_hopa
+		
+		afangi.vinnumat_hopa = vinnumat_hopa;
+
 		return afangi;
 	}
 }

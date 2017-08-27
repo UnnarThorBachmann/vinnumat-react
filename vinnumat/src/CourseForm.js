@@ -5,12 +5,7 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 import HopurForm from './HopurForm';
 import Button from 'react-bootstrap/lib/Button';
-/**
-* This component was constructed by Unnar Thor Bachmann.
-* Some of the code is under heavy influence from the video
-* lectures.
-* This component renders the search list.
-**/
+
 class CourseForm extends React.Component  {
 
   afangaHeiti = ['Almenn braut',
@@ -279,24 +274,7 @@ class CourseForm extends React.Component  {
               </FormGroup>
             </form>
           </div>
-           <div className="CourseUnitFormMin">
-            <form>
-              <FormGroup
-                controlId="formBasicText"
-                validationState={this.getValidationHlutfall()}
-              >
-              <ControlLabel>Hlutfall (%): </ControlLabel>
-              <FormControl
-                type="text"
-                value={this.state.hlutfall}
-                placeholder={this.state.hlutfall}
-                onChange={this.handleChangeHlutfall}
-              />
-              <FormControl.Feedback />
-              <HelpBlock>Ef kennt er á móti öðrum.</HelpBlock>
-              </FormGroup>
-            </form>
-          </div>
+           
           <div className="CourseUnitForm">
             <form>
               <ControlLabel style={{color: '#3c763d'}}>Hópar: </ControlLabel>

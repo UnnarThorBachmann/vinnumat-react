@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
 import ListGroup from 'react-bootstrap/lib/ListGroup';
 import ListGroupItem from 'react-bootstrap/lib/ListGroupItem';
-
+import HlutfallForm from './HlutfallForm'
 
 class AfangiComponent extends React.Component  {
+
+	changeHlutfall = (gildi, heiti,nr) => {
+		this.props.changeHlutfall(gildi,heiti,nr);
+	}
 
 	render() {
     	return (
@@ -15,7 +19,6 @@ class AfangiComponent extends React.Component  {
     			<h5><strong>Innslegnir stikar</strong></h5>
     			<ListGroup>
     				<ListGroupItem>Einingar: {this.props.afangi.einingar}</ListGroupItem>
-    				<ListGroupItem>Hlutfall: {this.props.afangi.hlutfall}%</ListGroupItem>
     				<ListGroupItem>Kennslustundir á viku: {this.props.afangi.kstundirAviku}</ListGroupItem>
     				<ListGroupItem>Lengd kennslustunda: {this.props.afangi.lengdKennslustunda} mín</ListGroupItem>
     				<ListGroupItem>Sýnidæmi: {this.props.afangi.synidaemiHeiti}</ListGroupItem>
@@ -33,7 +36,7 @@ class AfangiComponent extends React.Component  {
     		    			<ListGroupItem>Skerðing: {this.props.afangi.vinnumat_hopa[0].skerding.toFixed(1).toString().replace('.',',')} klst. </ListGroupItem>
 					}
 					{this.props.afangi.vinnumat_hopa[0].hasOwnProperty('skerdingarprosenta') &&
-    		    			<ListGroupItem>{(this.props.afangi.vinnumat_hopa[0].skerdingarprosenta*100).toFixed(1).toString().replace('.',',')} %</ListGroupItem>
+    		    			<ListGroupItem>-{(this.props.afangi.vinnumat_hopa[0].skerdingarprosenta*100).toFixed(1).toString().replace('.',',')} %</ListGroupItem>
 					}
     			</ListGroup>
     			</div>
@@ -42,10 +45,16 @@ class AfangiComponent extends React.Component  {
     					<div className="listarNidurstodur" key={hopur.hopur}>
     					<h5><strong>Hópur: {hopur.hopur}</strong></h5>
 						<ListGroup>
-    					<ListGroupItem>Fjöldi: {hopur.fjoldi.toString().replace('.',',')}</ListGroupItem>
-    					<ListGroupItem>Vinna vegna nemenda: {hopur.vinna_vegna_nemenda.toFixed(1).toString().replace('.',',')} klst.</ListGroupItem>
-    					<ListGroupItem>Vinnumat: {hopur.vinnumat.toFixed(2).toString().replace('.',',')} klst.</ListGroupItem>
+    						<ListGroupItem>Fjöldi: {hopur.fjoldi.toString().replace('.',',')}</ListGroupItem>
+    						<ListGroupItem>Vinna vegna nemenda: {hopur.vinna_vegna_nemenda.toFixed(1).toString().replace('.',',')} klst.</ListGroupItem>
+    						<ListGroupItem>Vinnumat: {hopur.vinnumat_skert.toFixed(2).toString().replace('.',',')} klst.</ListGroupItem>
+    						{hopur.hasOwnProperty('fradrattur') &&
+    		    				<ListGroupItem>-{hopur.fradrattur.toFixed(1).toString().replace('.',',')} klst.</ListGroupItem>
+							}
+    						<ListGroupItem><HlutfallForm hlutfall={hopur.hlutfall} nr={hopur.hopur} changeHlutfall = {this.changeHlutfall} heiti={this.props.afangi.heiti}/></ListGroupItem>
+ 
     					</ListGroup>
+    					
     					</div>
     				)
     			}
