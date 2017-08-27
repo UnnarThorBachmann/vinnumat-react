@@ -4,16 +4,16 @@ class Afangi {
 
 	constructor (info_object) {
 		this.heiti = info_object.heiti;
-		this.vikur = parseFloat(info_object.vikur);
-		this.einingar = parseFloat(info_object.einingar);
-		this.hlutfall = parseFloat(info_object.hlutfall);
-		this.kstundirAviku = parseFloat(info_object.kstundirAviku);
-		this.lengdKennslustunda = parseFloat(info_object.lengdKennslustunda);
+		this.vikur = parseFloat(info_object.vikur.replace(',','.'));
+		this.einingar = parseFloat(info_object.einingar.replace(',','.'));
+		this.hlutfall = parseFloat(info_object.hlutfall.replace(',','.'));
+		this.kstundirAviku = parseFloat(info_object.kstundirAviku.replace(',','.'));
+		this.lengdKennslustunda = parseFloat(info_object.lengdKennslustunda.replace(',','.'));
 		this.synidaemi = Synidaemi[info_object.synidaemi];
 		this.undirb_kennslu = this.synidaemi.undirb_kennslu;
 		this.hopar = []
 		for (let hopur in info_object.hopar.slice(0,info_object.hopar.length-1))
-			this.hopar.push(parseFloat(info_object.hopar[hopur]));
+			this.hopar.push(parseFloat(info_object.hopar[hopur].replace(',','.')));
 
 		this.stadin_kennsla = 0;
 		this.undirbuningur = 0;
@@ -64,6 +64,7 @@ class Afangi {
 		let vinnumat_skuggi = hopar[0].vinna_stadin 
 							  + hopar[0].vinna_undirbuningur
 							  + hopar[0].vinna_fastur;
+		
 		vinnumat_skuggi += this.vinna_vegna_nemenda(medaltal);
 		let n = hopar.length;
 		let skerdingarprosenta;
@@ -78,6 +79,8 @@ class Afangi {
 			hopur.skerding = vinnumat_skuggi*skerdingarprosenta;
 			hopur.vinnumat = hopur.vinnumat - hopur.skerding;
 		}
+		console.log('vinnumat skugga',vinnumat_skuggi);
+		
 		return hopar
 	}
 
