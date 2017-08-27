@@ -103,7 +103,7 @@ class App extends Component {
 
         	</div>
         	<div className="mainBody">
-        		<Tabs defaultActiveKey={1}>
+        		<Tabs defaultActiveKey={1} id="tabbar">
     				<Tab eventKey={1} title="Um kennarann">
     					<TeacherForm changeDisableButton={this.changeDisableButton}/>
 					</Tab>
@@ -117,8 +117,10 @@ class App extends Component {
       				
       					}
     				</Tab>
-  				</Tabs>
-      			
+    				<Tab eventKey={4} title="Niðurstöður kennara">
+    					
+    				</Tab>
+  				</Tabs>   			
       		</div>
       	</div>
     );
