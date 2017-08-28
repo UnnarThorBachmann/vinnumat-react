@@ -24,8 +24,8 @@ class HlutfallForm extends React.Component  {
           <div className="hlutfallsbord">
             <span className="hlutfall-gildi">{this.state.hlutfall} %</span>
             <div>
-              <Button className="takki-min" bsSize="xsmall" bsStyle="default" disabled={false} onClick={this.minus}><span className="glyphicon glyphicon-chevron-left"></span></Button>
-              <Button className="takki-min" bsSize="xsmall" bsStyle="default" disabled={false} onClick={this.plus}><span className="glyphicon glyphicon-chevron-right"></span></Button>
+              <Button className="takki-min" bsSize="xsmall" bsStyle="primary" disabled={false} onClick={this.minus}><span className="glyphicon glyphicon-chevron-left"></span></Button>
+              <Button className="takki-min" bsSize="xsmall" bsStyle="primary" disabled={false} onClick={this.plus}><span className="glyphicon glyphicon-chevron-right"></span></Button>
             </div>
           </div>
     );

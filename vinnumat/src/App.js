@@ -16,22 +16,26 @@ class App extends Component {
   			disableCourse: true,
   			teacher: {afangar: new Map()}
   }
-
-  changeHlutfall = (gildi,heiti,nr) => {
-  	console.log('gildi',gildi);
+  destroy = (heiti) => {
   	console.log('heiti',heiti);
-  	console.log('nr',nr);
+  	console.log('teacher',this.state.teacher);
+  	this.setState(state => {
+  		state.teacher.afangar.delete(heiti);
+  		return {teacher: {afangar: state.teacher.afangar}};
+  	});
+
+  }
+  changeHlutfall = (gildi,heiti,nr) => {
+  	
   	let afangi_change = this.state.teacher.afangar.get(heiti);
   	afangi_change.vinnumat_hopa[parseInt(nr-1)].hlutfall = parseInt(gildi);
 	afangi_change.vinnumat_hopa[parseInt(nr-1)].fradrattur = parseFloat(afangi_change.vinnumat_hopa[parseInt(nr-1)].vinnumat)*(100-parseFloat(gildi))/100;
   	afangi_change.vinnumat_hopa[parseInt(nr-1)].vinnumat_skert = parseFloat(afangi_change.vinnumat_hopa[parseInt(nr-1)].vinnumat) - parseFloat(afangi_change.vinnumat_hopa[parseInt(nr-1)].fradrattur);
-  	
-  	//afangi_change.vinnumat_hopa[parseInt(nr-1)].vinnumat = afangi_change.vinnumat_hopa[parseInt(nr-1)].vinnumat;
-  	
+  	  	
   	this.setState(state => {
   		state.teacher.afangar.set(heiti,afangi_change);
   		return {teacher: {afangar: state.teacher.afangar}};
-  	})
+  	});
 
   }
   add = (state) => {
@@ -125,7 +129,7 @@ class App extends Component {
     				<Tab eventKey={3} title="Niðurstöður">
     					{
       				
-      						[...this.state.teacher.afangar.values()].map((afangi)=> <AfangiComponent key={afangi.heiti} afangi={afangi} changeHlutfall={this.changeHlutfall}/>)
+      						[...this.state.teacher.afangar.values()].map((afangi)=> <AfangiComponent key={afangi.heiti} afangi={afangi} destroy ={this.destroy} changeHlutfall={this.changeHlutfall}/>)
       				
       					}
     				</Tab>
