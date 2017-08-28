@@ -17,25 +17,29 @@ class TeacherForm extends React.Component  {
   state = {
     aldur: '30 ára-',
     cHluti: '0',
-    launaflokkur: '',
-    threp: '',
-    vikur: '15'
+    launaflokkur: '1',
+    threp: '0',
   }
 
   handleChangeAldur = (e) => {
     this.setState({aldur: e.target.value });
+    this.props.changeTeacher({'aldur': e.target.value});
   }
 
   handleChangeC = (e) => {
     this.setState({cHluti: e.target.value.replace(',','.') });
     this.props.changeDisableButton(this.state,'cHluti',e.target.value);
-
+    this.props.changeTeacher({'cHluti': e.target.value});
   }
   handleChangeLaunaflokkur = (e) => {
     this.setState({launaflokkur: e.target.value });
+    this.props.changeTeacher({'launaflokkur': e.target.value});
   }
+
   handleChangeThrep = (e) => {
-    this.setState({threp: e.target.value });
+    console.log(e.target.value);
+    this.setState({threp: e.target.value});
+    this.props.changeTeacher({'threp': e.target.value});
   }
   
   getValidationCHluti = () => {
@@ -45,7 +49,6 @@ class TeacherForm extends React.Component  {
   render() {
     return (
       <div className="BorderTeacherForm">
-        <h4>Um kennarann</h4>
 
       <div className="TeacherForm">
         <div className="TeacherUnitForm">
@@ -64,9 +67,9 @@ class TeacherForm extends React.Component  {
                 <option value="30 ára-">30 ára-</option>
                 <option value="30-37 ára">30-37 ára</option>
                 <option value="38-54 ára">38-54 ára</option>
-                <option value="38-54 ára">55-60 ára</option>
-                <option value="38-54 ára">60 ára+</option>
-                <option value="38-54 ára">60 ára+ (17 tímar)</option>
+                <option value="55-60 ára">55-60 ára</option>
+                <option value="60 ára+">60 ára+</option>
+                <option value="60 ára+ (17 tímar)">60 ára+ (17 tímar)</option>
               </FormControl>
               <HelpBlock>Fyrir rétta vinnuskyldu</HelpBlock>
             </FormGroup>
@@ -100,7 +103,7 @@ class TeacherForm extends React.Component  {
             <ControlLabel>Launaflokkur: </ControlLabel>
             <FormControl 
                 componentClass="select" 
-                placeholder="1"
+                placeholder={this.state.launaflokkur}
                 value={this.state.launaflokkur}
                 onChange={this.handleChangeLaunaflokkur}
             >
@@ -123,12 +126,12 @@ class TeacherForm extends React.Component  {
             <ControlLabel>Þrep: </ControlLabel>
             <FormControl 
                 componentClass="select" 
-                placeholder="0"
+                placeholder={this.state.threp}
                 value={this.state.threp}
                 onChange={this.handleChangeThrep}
             >
             {
-              this.threp.map((threp)=><option key={threp} value="{threp}">{threp}</option>)
+              this.threp.map((threp)=><option key={threp} value={threp}>{threp}</option>)
             }
             </FormControl>
             <HelpBlock>Fyrir rétta launaútreikninga.</HelpBlock>

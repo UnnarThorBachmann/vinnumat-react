@@ -5,7 +5,8 @@ import CourseForm from './CourseForm'
 import Media from 'react-bootstrap/lib/Media';
 import './App.css';
 import Afangi from './afangi.js';
-import AfangiComponent from './afangiComponent';
+import AfangiForm from './afangiForm';
+import KennariForm from './kennariForm';
 import Tab from 'react-bootstrap/lib/Tab';
 import Tabs from 'react-bootstrap/lib/Tabs';
 
@@ -14,17 +15,42 @@ class App extends Component {
 
   state = {disableTeacher: false,
   			disableCourse: true,
-  			teacher: {afangar: new Map()}
+  			teacher: {afangar: new Map(),
+  						aldur: '30 ára-',
+    					cHluti: '0',
+    					launaflokkur: '1',
+    					threp: '0'
+    				}
   }
   destroy = (heiti) => {
-  	console.log('heiti',heiti);
-  	console.log('teacher',this.state.teacher);
+  	
   	this.setState(state => {
   		state.teacher.afangar.delete(heiti);
-  		return {teacher: {afangar: state.teacher.afangar}};
+  		return {teacher: {afangar: state.teacher.afangar,
+  						  aldur: state.teacher.aldur,
+  						  cHluti: state.teacher.cHluti,
+  						  launaflokkur: state.teacher.launaflokkur,
+  						  threp: state.teacher.threp
+  		}};
   	});
 
   }
+
+  changeTeacher = (object_changed) => {
+  	
+  	let state_changed = this.state;
+  	if (object_changed.hasOwnProperty('aldur'))
+  		state_changed.teacher['aldur'] = object_changed['aldur'];
+  	else if (object_changed.hasOwnProperty('cHluti'))
+  		state_changed.teacher['cHluti'] = object_changed['cHluti'];
+  	else if (object_changed.hasOwnProperty('launaflokkur'))
+  		state_changed.teacher['launaflokkur'] = object_changed['launaflokkur'];
+  	else if (object_changed.hasOwnProperty('threp'))
+  		state_changed.teacher['threp'] = object_changed['threp'];
+
+  	this.setState((state) => {teacher: state_changed.teacher});
+  }
+
   changeHlutfall = (gildi,heiti,nr) => {
   	
   	let afangi_change = this.state.teacher.afangar.get(heiti);
@@ -34,7 +60,12 @@ class App extends Component {
   	  	
   	this.setState(state => {
   		state.teacher.afangar.set(heiti,afangi_change);
-  		return {teacher: {afangar: state.teacher.afangar}};
+  		return {teacher: {afangar: state.teacher.afangar,
+  						  aldur: state.teacher.aldur,
+  						  cHluti: state.teacher.cHluti,
+  						  launaflokkur: state.teacher.launaflokkur,
+  						  threp: state.teacher.threp
+  		}};
   	});
 
   }
@@ -46,7 +77,7 @@ class App extends Component {
   }
 
   changeDisableButton= (state,changedProp, value) => {
-  	
+
 
   	if (changedProp === 'cHluti') {
   		if (isNaN(value) || value.trim() === '')
@@ -81,7 +112,7 @@ class App extends Component {
   		if (changedProp === 'hopar') {
   			let groups = state['hopar'];
   			groups[value[0]] = value[1];
-  			groups = groups.slice(0,groups.length);
+  			groups = groups.slice(0,groups.length-1);
 
   			if (groups[groups.length-1] === '')
   				groups = groups.slice(0,groups.length-1);
@@ -121,20 +152,19 @@ class App extends Component {
         	<div className="mainBody">
         		<Tabs defaultActiveKey={1} id="tabbar">
     				<Tab eventKey={1} title="Um kennarann">
-    					<TeacherForm changeDisableButton={this.changeDisableButton}/>
+    					<TeacherForm changeDisableButton={this.changeDisableButton} changeTeacher = {this.changeTeacher}/>
 					</Tab>
     				<Tab eventKey={2} title="Bæta við áfanga">
         				<CourseForm changeDisableButton={this.changeDisableButton} add={this.add} disable={this.state.disableTeacher || this.state.disableCourse}/>
     				</Tab>
-    				<Tab eventKey={3} title="Niðurstöður">
+    				<Tab eventKey={3} title="Niðurstöður áfanga">
     					{
       				
-      						[...this.state.teacher.afangar.values()].map((afangi)=> <AfangiComponent key={afangi.heiti} afangi={afangi} destroy ={this.destroy} changeHlutfall={this.changeHlutfall}/>)
-      				
+      						[...this.state.teacher.afangar.values()].map((afangi)=> <AfangiForm key={afangi.heiti} afangi={afangi} destroy ={this.destroy} changeHlutfall={this.changeHlutfall}/>)
       					}
     				</Tab>
     				<Tab eventKey={4} title="Niðurstöður kennara">
-    					
+    					<KennariForm kennari={this.state.teacher}/>
     				</Tab>
   				</Tabs>   			
       		</div>

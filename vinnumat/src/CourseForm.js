@@ -150,7 +150,6 @@ class CourseForm extends React.Component  {
     return (
       <div className="BorderCourseForm">
         <Button className="takki" bsStyle="success" disabled={this.props.disable} onClick={this.add}><span className="glyphicon glyphicon-plus"></span></Button>
-        <h4>Um áfanga</h4>
 
         <div className="CourseForm">
           <div className="CourseUnitForm">
