@@ -5,15 +5,17 @@ import HlutfallForm from './HlutfallForm'
 import Button from 'react-bootstrap/lib/Button';
 import Col from 'react-bootstrap/lib/Col';
 import Row from 'react-bootstrap/lib/Row';
-
 class AfangiForm extends React.Component  {
+
 
 	changeHlutfall = (gildi, heiti,nr) => {
 		this.props.changeHlutfall(gildi,heiti,nr);
 	}
+
 	destroy = () => {
 		this.props.destroy(this.props.afangi.heiti);
 	}
+    
 	render() {
     	return (
     		<div className="afangiRammi">

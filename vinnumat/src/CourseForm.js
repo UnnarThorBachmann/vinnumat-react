@@ -7,8 +7,10 @@ import HopurForm from './HopurForm';
 import Button from 'react-bootstrap/lib/Button';
 import Col from 'react-bootstrap/lib/Col';
 import Row from 'react-bootstrap/lib/Row';
-
+import Tilkynning from './tilkynning.js'
+    
 class CourseForm extends React.Component  {
+
 
   afangaHeiti = ['Almenn braut',
             'Fagbóklegt',
@@ -42,7 +44,8 @@ class CourseForm extends React.Component  {
     kstundirAviku: '6',
     lengdKennslustunda: '40',
     hlutfall: '100',
-    hopar: ['25','']
+    hopar: ['25',''],
+    showModal: false
   }
 
   handleChangeHeiti = (e) => {  
@@ -145,9 +148,24 @@ class CourseForm extends React.Component  {
   }
   
   add =(e)=> {
+    this.setState({showModal: true});
     this.props.add(this.state);
+
   }
 
+  loka = (e)=> {
+    this.setState({
+      heiti: '',
+      vikur: '15',
+      einingar: '3',
+      synidaemi: 'Almenn braut',
+      kstundirAviku: '6',
+      lengdKennslustunda: '40',
+      hlutfall: '100',
+      hopar: ['25',''],
+      showModal: false
+    })
+  }
   render() {
     return (
       <div className="BorderCourseForm">
@@ -284,6 +302,7 @@ class CourseForm extends React.Component  {
             </form>
           </Col>
         </Row>
+        <Tilkynning show={this.state.showModal} onHide={this.loka} heiti={this.state.heiti}/>
       </div>
     );
   }
