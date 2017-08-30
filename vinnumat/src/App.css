@@ -3,10 +3,12 @@
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
+  animation: App-logo-spin infinite 30s linear;
   height: 40px;
 }
-
+.header {
+  margin-left: 10px;
+}
 .App-header {
   background-color: #222;
   height: 60px;
@@ -54,11 +56,12 @@ div.BorderTeacherForm {
   margin-top: 1%;
 }
 div.TeacherUnitForm {
+  padding: 2%;
   width: 20%;
 }
 
 div.CourseForm {
- 
+  padding-top: 2%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -67,15 +70,15 @@ div.BorderCourseForm {
   width: 100%;
   border: solid;
   border-width: 0.5px;
-  padding-left: 2%; 
+  padding-left: 1%; 
   margin-top: 1%;
 }
 div.CourseUnitForm {
-  width: 12%;
+  width: 15%;
 }
 
 div.CourseUnitFormMin {
-  width: 7%;
+  width: 10%;
 }
 
 div.mainBody {
@@ -93,11 +96,10 @@ div.mainBody {
   margin-top: 1%;
   border-style: solid;
   border-width: 1px;
-  padding: 1%;
+  padding-top: 1%;
 }
 .nidurstadaAfanga {
   
- 
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -126,6 +128,7 @@ div.mainBody {
   width: 80%;
   margin-left: 1%;
 }
+
 
 
 @keyframes App-logo-spin {

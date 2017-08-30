@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import TeacherForm from './TeacherForm'
 import CourseForm from './CourseForm'
 import Media from 'react-bootstrap/lib/Media';
@@ -9,7 +8,8 @@ import AfangiForm from './afangiForm';
 import KennariForm from './kennariForm';
 import Tab from 'react-bootstrap/lib/Tab';
 import Tabs from 'react-bootstrap/lib/Tabs';
-
+//import logo from './logo.svg';
+import logo from './logo-100.png';
 
 class App extends Component {
 
@@ -55,7 +55,7 @@ class App extends Component {
   	
   	let afangi_change = this.state.teacher.afangar.get(heiti);
   	afangi_change.vinnumat_hopa[parseInt(nr-1)].hlutfall = parseInt(gildi);
-	afangi_change.vinnumat_hopa[parseInt(nr-1)].fradrattur = parseFloat(afangi_change.vinnumat_hopa[parseInt(nr-1)].vinnumat)*(100-parseFloat(gildi))/100;
+	  afangi_change.vinnumat_hopa[parseInt(nr-1)].fradrattur = parseFloat(afangi_change.vinnumat_hopa[parseInt(nr-1)].vinnumat)*(100-parseFloat(gildi))/100;
   	afangi_change.vinnumat_hopa[parseInt(nr-1)].vinnumat_skert = parseFloat(afangi_change.vinnumat_hopa[parseInt(nr-1)].vinnumat) - parseFloat(afangi_change.vinnumat_hopa[parseInt(nr-1)].fradrattur);
   	  	
   	this.setState(state => {
@@ -136,15 +136,15 @@ class App extends Component {
   	}
 
   }
-  
+  /*<img src={logo} className="App-logo" alt="Image"/>*/
+  /*<Icon className='normal' />;*/
   render() {
-  	
-
+    
     return (
      	<div className="App">
     		<div className="App-header">
     			<div className='left'>
-    				<img src={logo} className="App-logo" alt="Image"/>
+            <img src={logo} className="App-logo" alt="Image"/>
     				<span className="header">Vinnumat</span>
     			</div>
 
