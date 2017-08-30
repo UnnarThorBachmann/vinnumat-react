@@ -23,7 +23,7 @@ class AfangiForm extends React.Component  {
 
     	return (
     		<div className="afangiRammi">
-                <OverlayTrigger placement="left" overlay={tooltip}>
+                <OverlayTrigger placement="left" overlay={tooltip} rootClose={true}>
                     <Button className="takki" bsStyle="danger" disabled={false} onClick={this.destroy}><span className="glyphicon glyphicon-minus"></span></Button>
     		    </OverlayTrigger>
             <h4><strong>Heiti: {this.props.afangi.heiti}</strong></h4>

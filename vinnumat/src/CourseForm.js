@@ -174,7 +174,7 @@ class CourseForm extends React.Component  {
 
     return (
       <div className="BorderCourseForm">
-        <OverlayTrigger placement="left" overlay={tooltip}>
+        <OverlayTrigger placement="left" overlay={tooltip} rootClose={true}>
           <Button className="takki" bsStyle="success" disabled={this.props.disable} onClick={this.add}><span className="glyphicon glyphicon-plus"></span></Button>
         </OverlayTrigger>
 

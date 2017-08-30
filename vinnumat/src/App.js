@@ -73,6 +73,7 @@ class App extends Component {
   	let afangi = new Afangi(state);
   	let afangi_nidurstodur = afangi.vinnumat();
   	this.setState((state) => {teacher: {afangar: this.state.teacher.afangar.set(afangi_nidurstodur.heiti,afangi_nidurstodur)}});
+    this.setState({disableCourse: true});
   	
   }
 
