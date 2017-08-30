@@ -5,6 +5,8 @@ import HlutfallForm from './HlutfallForm'
 import Button from 'react-bootstrap/lib/Button';
 import Col from 'react-bootstrap/lib/Col';
 import Row from 'react-bootstrap/lib/Row';
+import Tooltip from 'react-bootstrap/lib/Tooltip';
+import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 class AfangiForm extends React.Component  {
 
 
@@ -17,10 +19,14 @@ class AfangiForm extends React.Component  {
 	}
     
 	render() {
+        const tooltip = (<Tooltip id="tooltip"><strong>Eyða</strong></Tooltip>);
+
     	return (
     		<div className="afangiRammi">
-            <Button className="takki" bsStyle="danger" disabled={false} onClick={this.destroy}><span className="glyphicon glyphicon-minus"></span></Button>
-    		<h4><strong>Heiti: {this.props.afangi.heiti}</strong></h4>
+                <OverlayTrigger placement="left" overlay={tooltip}>
+                    <Button className="takki" bsStyle="danger" disabled={false} onClick={this.destroy}><span className="glyphicon glyphicon-minus"></span></Button>
+    		    </OverlayTrigger>
+            <h4><strong>Heiti: {this.props.afangi.heiti}</strong></h4>
     		<Row>
     			<Col xs={12} md={2}>
     			 <h5><strong>Innslegnir stikar</strong></h5>

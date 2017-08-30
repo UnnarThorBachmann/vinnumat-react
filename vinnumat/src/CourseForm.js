@@ -7,8 +7,11 @@ import HopurForm from './HopurForm';
 import Button from 'react-bootstrap/lib/Button';
 import Col from 'react-bootstrap/lib/Col';
 import Row from 'react-bootstrap/lib/Row';
+import Tooltip from 'react-bootstrap/lib/Tooltip';
+import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
+
 import Tilkynning from './tilkynning.js'
-    
+
 class CourseForm extends React.Component  {
 
 
@@ -167,9 +170,13 @@ class CourseForm extends React.Component  {
     })
   }
   render() {
+    const tooltip = (<Tooltip id="tooltip"><strong>Bæta við eða uppfæra</strong></Tooltip>);
+
     return (
       <div className="BorderCourseForm">
-        <Button className="takki" bsStyle="success" disabled={this.props.disable} onClick={this.add}><span className="glyphicon glyphicon-plus"></span></Button>
+        <OverlayTrigger placement="left" overlay={tooltip}>
+          <Button className="takki" bsStyle="success" disabled={this.props.disable} onClick={this.add}><span className="glyphicon glyphicon-plus"></span></Button>
+        </OverlayTrigger>
 
         <Row className="show-grid">
           <Col xs={12} md={2}>
