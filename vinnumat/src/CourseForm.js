@@ -5,6 +5,8 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 import HopurForm from './HopurForm';
 import Button from 'react-bootstrap/lib/Button';
+import Col from 'react-bootstrap/lib/Col';
+import Row from 'react-bootstrap/lib/Row';
 
 class CourseForm extends React.Component  {
 
@@ -151,8 +153,8 @@ class CourseForm extends React.Component  {
       <div className="BorderCourseForm">
         <Button className="takki" bsStyle="success" disabled={this.props.disable} onClick={this.add}><span className="glyphicon glyphicon-plus"></span></Button>
 
-        <div className="CourseForm">
-          <div className="CourseUnitForm">
+        <Row className="show-grid">
+          <Col xs={12} md={2}>
             <form>
               <FormGroup
                 controlId="formBasicText"
@@ -169,8 +171,8 @@ class CourseForm extends React.Component  {
               <HelpBlock>Heiti áfanga.</HelpBlock>
               </FormGroup>
             </form>
-          </div>
-          <div className="CourseUnitFormMin">
+          </Col>
+          <Col xs={12} md={2}>
             <form>
               <FormGroup
                 controlId="formBasicText"
@@ -193,8 +195,8 @@ class CourseForm extends React.Component  {
                 <HelpBlock>15 vikur í sýnidæmum</HelpBlock>
               </FormGroup>
             </form>
-          </div>
-          <div className="CourseUnitFormMin">
+          </Col>
+          <Col xs={12} md={1}>
             <form>
               <FormGroup
                 controlId="formBasicText"
@@ -213,8 +215,8 @@ class CourseForm extends React.Component  {
               <HelpBlock><strong>5f oftast 3e</strong></HelpBlock>
               </FormGroup>
             </form>
-          </div>
-          <div className="CourseUnitForm">
+          </Col>
+          <Col xs={12} md={2}>
             <form>
               <FormGroup
                 controlId="formBasicText"
@@ -235,8 +237,8 @@ class CourseForm extends React.Component  {
                 </FormControl>
               </FormGroup>
             </form>
-          </div>
-          <div className="CourseUnitFormMin">
+          </Col>
+          <Col xs={12} md={2}>
             <form>
               <FormGroup
                 controlId="formBasicText"
@@ -254,8 +256,8 @@ class CourseForm extends React.Component  {
 
               </FormGroup>
             </form>
-          </div>
-          <div className="CourseUnitFormMin">
+          </Col>
+          <Col xs={12} md={1}>
             <form>
               <FormGroup
                 controlId="formBasicText"
@@ -272,17 +274,16 @@ class CourseForm extends React.Component  {
               <HelpBlock>í mínútum</HelpBlock>
               </FormGroup>
             </form>
-          </div>
-           
-          <div className="CourseUnitForm">
+          </Col>
+          <Col xs={12} md={1}>
             <form>
               <ControlLabel style={{color: '#3c763d'}}>Hópar: </ControlLabel>
               {
                 this.state.hopar.map((fjoldi,i) => <HopurForm key={i} index={i} fjoldi={fjoldi} change={this.changeHopar} end={i === (this.state.hopar.length-1)} size={this.state.hopar.length}/>)
               }
             </form>
-          </div>                          
-        </div>
+          </Col>
+        </Row>
       </div>
     );
   }

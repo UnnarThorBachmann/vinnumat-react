@@ -3,11 +3,12 @@
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 30s linear;
+  animation: App-logo-spin infinite 60s linear;
   height: 40px;
 }
 .header {
   margin-left: 10px;
+  font-size: 1.2em;
 }
 .App-header {
   background-color: #222;
@@ -52,7 +53,7 @@ div.BorderTeacherForm {
   width: 100%;
   border: solid;
   border-width: 0.5px;
-  padding-left: 2%; 
+  padding: 1%; 
   margin-top: 1%;
 }
 div.TeacherUnitForm {
@@ -70,11 +71,11 @@ div.BorderCourseForm {
   width: 100%;
   border: solid;
   border-width: 0.5px;
-  padding-left: 1%; 
+  padding: 1%; 
   margin-top: 1%;
 }
 div.CourseUnitForm {
-  width: 15%;
+  width: 100%;
 }
 
 div.CourseUnitFormMin {
@@ -87,6 +88,9 @@ div.mainBody {
   padding-top: 2%;
 }
 
+.afangiHeiti {
+  padding-left: 1%;
+}
 .takki  {
   float: right;
   margin: 5px;
@@ -96,7 +100,8 @@ div.mainBody {
   margin-top: 1%;
   border-style: solid;
   border-width: 1px;
-  padding-top: 1%;
+  padding: 1%;
+
 }
 .nidurstadaAfanga {
   
@@ -135,3 +140,4 @@ div.mainBody {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+

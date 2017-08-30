@@ -3,13 +3,11 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
+import Col from 'react-bootstrap/lib/Col';
+import Row from 'react-bootstrap/lib/Row';
 
-/**
-* This component was constructed by Unnar Thor Bachmann.
-* Some of the code is under heavy influence from the video
-* lectures.
-* This component renders the search list.
-**/
+
+
 class TeacherForm extends React.Component  {
 
   launaflokkar = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16']
@@ -50,8 +48,8 @@ class TeacherForm extends React.Component  {
     return (
       <div className="BorderTeacherForm">
 
-      <div className="TeacherForm">
-        <div className="TeacherUnitForm">
+      <Row>
+        <Col xs={12} md={3}>
           <form>
             <FormGroup
               controlId="formBasicText"
@@ -74,8 +72,8 @@ class TeacherForm extends React.Component  {
               <HelpBlock>Fyrir rétta vinnuskyldu</HelpBlock>
             </FormGroup>
           </form>
-        </div>
-        <div className="TeacherUnitForm">
+        </Col>
+        <Col xs={12} md={3}>
           <form>
             <FormGroup
               controlId="formBasicText"
@@ -92,9 +90,10 @@ class TeacherForm extends React.Component  {
               <HelpBlock>Önnur vinna en kennsla.</HelpBlock>
             </FormGroup>
           </form>
-        </div>
+        </Col>
        
-        <div className="TeacherUnitForm">
+        <Col xs={12} md={3}>
+
           <form>
             <FormGroup
               controlId="formBasicText"
@@ -116,8 +115,8 @@ class TeacherForm extends React.Component  {
             <HelpBlock>Fyrir rétta launaútreikninga.</HelpBlock>
             </FormGroup>
           </form>
-        </div>
-        <div className="TeacherUnitForm">
+        </Col>
+        <Col xs={12} md={3}>
           <form>
             <FormGroup
               controlId="formBasicText"
@@ -137,8 +136,8 @@ class TeacherForm extends React.Component  {
             <HelpBlock>Fyrir rétta launaútreikninga.</HelpBlock>
             </FormGroup>
           </form>
-        </div>
-      </div>
+        </Col>
+      </Row>
       </div>
     );
   }
