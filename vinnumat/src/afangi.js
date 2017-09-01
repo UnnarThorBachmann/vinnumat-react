@@ -75,7 +75,7 @@ class Afangi {
 		for (let hopur of hopar) {
 			hopur.skerdingarprosenta = skerdingarprosenta;
 			hopur.skerding = vinnumat_skuggi*skerdingarprosenta;
-			hopur.vinnumat = hopur.vinnumat - hopur.skerding;
+			hopur.vinnumat_skert = hopur.vinnumat - hopur.skerding;
 		}
 		
 		return hopar
@@ -113,6 +113,7 @@ class Afangi {
 		afangi.synidaemiHeiti = this.synidaemi.heiti;
 		
 		afangi.vinnumat_hopa = vinnumat_hopa;
+		console.log(afangi.vinnumat_hopa);
 
 		return afangi;
 	}

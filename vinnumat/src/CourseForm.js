@@ -154,6 +154,7 @@ class CourseForm extends React.Component  {
     this.setState({showModal: true});
     this.props.add(this.state);
 
+
   }
 
   loka = (e)=> {
@@ -177,7 +178,9 @@ class CourseForm extends React.Component  {
         <OverlayTrigger placement="left" overlay={tooltip} rootClose={true}>
           <Button className="takki" bsStyle="success" disabled={this.props.disable} onClick={this.add}><span className="glyphicon glyphicon-plus"></span></Button>
         </OverlayTrigger>
-
+        {
+          this.state.showModal && <Tilkynning heiti={this.state.heiti} loka={this.loka}/>
+        }
         <Row className="show-grid">
           <Col xs={12} md={2}>
             <form>
@@ -309,7 +312,7 @@ class CourseForm extends React.Component  {
             </form>
           </Col>
         </Row>
-        <Tilkynning show={this.state.showModal} onHide={this.loka} heiti={this.state.heiti}/>
+        
       </div>
     );
   }
