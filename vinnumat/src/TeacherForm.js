@@ -5,6 +5,8 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 import Col from 'react-bootstrap/lib/Col';
 import Row from 'react-bootstrap/lib/Row';
+import Grid from 'react-bootstrap/lib/Grid';
+
 
 
 
@@ -47,7 +49,7 @@ class TeacherForm extends React.Component  {
   render() {
     return (
       <div className="BorderTeacherForm">
-
+      <Grid>
       <Row>
         <Col xs={12} md={3}>
           <form>
@@ -138,6 +140,7 @@ class TeacherForm extends React.Component  {
           </form>
         </Col>
       </Row>
+      </Grid>
       </div>
     );
   }

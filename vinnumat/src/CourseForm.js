@@ -7,6 +7,7 @@ import HopurForm from './HopurForm';
 import Button from 'react-bootstrap/lib/Button';
 import Col from 'react-bootstrap/lib/Col';
 import Row from 'react-bootstrap/lib/Row';
+import Grid from 'react-bootstrap/lib/Grid';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 
@@ -181,8 +182,10 @@ class CourseForm extends React.Component  {
         {
           this.state.showModal && <Tilkynning heiti={this.state.heiti} loka={this.loka}/>
         }
+        <Grid>
         <Row className="show-grid">
-          <Col xs={12} md={2}>
+
+          <Col xs={12} md={2} className="textabox">
             <form>
               <FormGroup
                 controlId="formBasicText"
@@ -200,7 +203,9 @@ class CourseForm extends React.Component  {
               </FormGroup>
             </form>
           </Col>
-          <Col xs={12} md={2}>
+          
+
+          <Col xs={12} md={2} className="textabox">
             <form>
               <FormGroup
                 controlId="formBasicText"
@@ -224,7 +229,7 @@ class CourseForm extends React.Component  {
               </FormGroup>
             </form>
           </Col>
-          <Col xs={12} md={1}>
+          <Col xs={12} md={1} className="textabox">
             <form>
               <FormGroup
                 controlId="formBasicText"
@@ -244,7 +249,7 @@ class CourseForm extends React.Component  {
               </FormGroup>
             </form>
           </Col>
-          <Col xs={12} md={2}>
+          <Col xs={12} md={2} className="textabox">
             <form>
               <FormGroup
                 controlId="formBasicText"
@@ -266,7 +271,7 @@ class CourseForm extends React.Component  {
               </FormGroup>
             </form>
           </Col>
-          <Col xs={12} md={2}>
+          <Col xs={12} md={2} className="textabox">
             <form>
               <FormGroup
                 controlId="formBasicText"
@@ -285,7 +290,7 @@ class CourseForm extends React.Component  {
               </FormGroup>
             </form>
           </Col>
-          <Col xs={12} md={1}>
+          <Col xs={12} md={1} className="textabox">
             <form>
               <FormGroup
                 controlId="formBasicText"
@@ -303,7 +308,7 @@ class CourseForm extends React.Component  {
               </FormGroup>
             </form>
           </Col>
-          <Col xs={12} md={1}>
+          <Col xs={12} md={1} className="textabox">
             <form>
               <ControlLabel style={{color: '#3c763d'}}>Hópar: </ControlLabel>
               {
@@ -312,6 +317,7 @@ class CourseForm extends React.Component  {
             </form>
           </Col>
         </Row>
+        </Grid>
         
       </div>
     );
