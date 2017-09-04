@@ -30,13 +30,17 @@ class KennariForm extends React.Component  {
         let yfirvinna = Math.max(vinnumat_a + cHluti -(vinnuskylda-kennsluafslattur*vinnuskylda_breytt),0);
         let grunnlaun = toflur.launatafla[this.props.kennari.launaflokkur][this.props.kennari.threp];
         let laun_yfirvinna = yfirvinna*this.hlutfallAfGrunnlaunum*grunnlaun;
-        let laun_desember = toflur.desemberuppbot['2016'];
-        let laun_orlof = toflur.orlofsuppbot['2016'];
+        let laun_desember = toflur.desemberuppbot['2016']*starfshlutfall;
+        let laun_orlof = toflur.orlofsuppbot['2016']*starfshlutfall;
         let launaflokkur = this.props.kennari.launaflokkur;
         let threp = this.props.kennari.threp;
-        let heildarlaun = (laun_orlof + laun_desember)/12 + laun_yfirvinna/6 + grunnlaun;
-        let launastrengur = `(${laun_desember} + ${laun_orlof})/12 +  ${laun_yfirvinna.toFixed(1).toString().replace('.',',')}/6 + ${grunnlaun} = ${heildarlaun.toFixed(1).toString().replace('.',',')} kr.`;
-    	return (
+        let heildarlaun = (laun_orlof + laun_desember)/12 + laun_yfirvinna/6 + grunnlaun*starfshlutfall;
+        let launastrengur = `(${laun_desember} + ${laun_orlof})/12 +  ${laun_yfirvinna.toFixed(1).toString().replace('.',',')}/6 + ${grunnlaun*starfshlutfall} = ${heildarlaun.toFixed(1).toString().replace('.',',')} kr.`;
+    	/*                        
+            <ListGroupItem>Laun vegna yfirvinnu: {laun_yfirvinna.toFixed(1).toString().replace('.',',')} kr. (100%)</ListGroupItem>
+        */
+
+        return (
     		<div className="kennariRammi">
     		  <h4>Niðurstaða fyrir {this.props.kennari.starfshlutfall}% starf í eina önn: </h4>
               <Table responsive>
@@ -89,6 +93,8 @@ class KennariForm extends React.Component  {
       </tr>
     </tbody>
   </Table>
+    <div className="nidurstadaKennara">
+    <div className="listarNidurstodurKennarar">
     <h5><strong>Nánara yfirlit A-hluta:</strong></h5>
 
     <ListGroup>
@@ -107,19 +113,19 @@ class KennariForm extends React.Component  {
                 ))
 
     }                   
-    </ListGroup>               
+    </ListGroup> 
+    </div>
+    </div>              
 
     		  <div className="nidurstadaKennara">
     			<div className="listarNidurstodurKennarar">
     			 <h5><strong>Laun:</strong></h5>
     			     <ListGroup>
                         <ListGroupItem>Launaflokkur og þrep: {launaflokkur} og {threp}</ListGroupItem>
-                        <ListGroupItem>Grunnlaun: {grunnlaun} kr.</ListGroupItem>
-                        <ListGroupItem>Desemberuppbot: {laun_desember} kr.</ListGroupItem>
-                        <ListGroupItem>Orlofsuppbot: {laun_orlof} kr.</ListGroupItem>
-                        <ListGroupItem>Laun vegna yfirvinnu: {laun_yfirvinna.toFixed(1).toString().replace('.',',')} kr.</ListGroupItem>
-                        <ListGroupItem>Laun á mánuði: {launastrengur}</ListGroupItem>
-		         
+                        <ListGroupItem>Grunnlaun: {parseFloat(grunnlaun*starfshlutfall).toFixed(1).toString().replace('.',',')} kr. á mánuði. (100% starf)</ListGroupItem>
+                        <ListGroupItem>Desemberuppbot: {laun_desember} kr. á ári (100% starf)</ListGroupItem>
+                        <ListGroupItem>Orlofsuppbot: {laun_orlof} kr. á ári (100% starf)</ListGroupItem>
+                    		         
                     </ListGroup>
     		    </div>
                </div>

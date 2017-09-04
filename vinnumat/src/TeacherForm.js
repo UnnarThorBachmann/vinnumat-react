@@ -89,32 +89,7 @@ class TeacherForm extends React.Component  {
                     '28',
                     '27',
                     '26',
-                    '25',
-                    '24',
-                    '23',
-                    '22',
-                    '21',
-                    '20',
-                    '19',
-                    '18',
-                    '17',
-                    '16',
-                    '15',
-                    '14',
-                    '13',
-                    '12',
-                    '11',
-                    '10',
-                    '9',
-                    '8',
-                    '7',
-                    '6',
-                    '5',
-                    '4',
-                    '3',
-                    '2',
-                    '1',
-                    '0'
+                    '25'
   ]
   aldur = ["30 ára-",
             "30-37 ára", 
@@ -160,13 +135,8 @@ class TeacherForm extends React.Component  {
   getValidationCHluti = () => {
     return (isNaN(this.state.cHluti.replace(',','.')) || this.state.cHluti.trim() === '')? 'error': 'success'
   }
-
-  render() {
-    return (
-      <div className="BorderTeacherForm">
-      <Grid>
-      <Row>
-        <Col xs={12} md={2}>
+  /*
+  <Col xs={12} md={2}>
           <form>
             <FormGroup
               controlId="formBasicText"
@@ -187,7 +157,15 @@ class TeacherForm extends React.Component  {
             </FormGroup>
           </form>
         </Col>
-        <Col xs={12} md={2}>
+  */
+
+  render() {
+    return (
+      <div className="BorderTeacherForm">
+      <Grid>
+      <Row>
+        
+        <Col xs={12} md={3}>
           <form>
             <FormGroup
               controlId="formBasicText"
@@ -209,7 +187,7 @@ class TeacherForm extends React.Component  {
             </FormGroup>
           </form>
         </Col>
-        <Col xs={12} md={2}>
+        <Col xs={12} md={3}>
           <form>
             <FormGroup
               controlId="formBasicText"
@@ -228,7 +206,7 @@ class TeacherForm extends React.Component  {
           </form>
         </Col>
        
-        <Col xs={12} md={2}>
+        <Col xs={12} md={3}>
 
           <form>
             <FormGroup
@@ -248,11 +226,11 @@ class TeacherForm extends React.Component  {
               )
             }
             </FormControl>
-            <HelpBlock>Fyrir rétta launaútreikninga.</HelpBlock>
+            <HelpBlock>Fyrir upplýsingar um grunnlaun.</HelpBlock>
             </FormGroup>
           </form>
         </Col>
-        <Col xs={12} md={2}>
+        <Col xs={12} md={3}>
           <form>
             <FormGroup
               controlId="formBasicText"
@@ -269,7 +247,7 @@ class TeacherForm extends React.Component  {
               this.threp.map((threp)=><option key={threp} value={threp}>{threp}</option>)
             }
             </FormControl>
-            <HelpBlock>Fyrir rétta launaútreikninga.</HelpBlock>
+            <HelpBlock>Fyrir upplýsingar um grunnlaun.</HelpBlock>
             </FormGroup>
           </form>
         </Col>
