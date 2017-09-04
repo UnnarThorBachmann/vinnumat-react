@@ -49,6 +49,7 @@ class CourseForm extends React.Component  {
     lengdKennslustunda: '40',
     hlutfall: '100',
     hopar: ['25',''],
+    skiptitimar: '0',
     showModal: false
   }
 
@@ -84,7 +85,11 @@ class CourseForm extends React.Component  {
     this.props.changeDisableButton(this.state,'hlutfall',e.target.value);
 
   }
+  handleChangeSkiptitimar = (e) => {
+    this.setState({skiptitimar: e.target.value });
+    this.props.changeDisableButton(this.state,'skiptitimar',e.target.value);
 
+  }
   
   getValidationHeiti = () => {
    
@@ -134,6 +139,15 @@ class CourseForm extends React.Component  {
       return 'success';
   }
 
+  getValidationSkiptitimar = () => {
+    if (this.state.skiptitimar.trim() === '')
+      return 'error';
+    else if (isNaN(this.state.skiptitimar.replace(',','.')))
+      return 'error'
+    else
+      return 'success';
+  }
+
   changeHopar = (index,value) => {
     
     this.setState((state)=>{
@@ -168,6 +182,7 @@ class CourseForm extends React.Component  {
       lengdKennslustunda: '40',
       hlutfall: '100',
       hopar: ['25',''],
+      skiptitimar: '0',
       showModal: false
     })
   }
@@ -205,13 +220,13 @@ class CourseForm extends React.Component  {
           </Col>
           
 
-          <Col xs={12} md={2} className="textabox">
+          <Col xs={12} md={1} className="textabox">
             <form>
               <FormGroup
                 controlId="formBasicText"
                 validationState={'success'}
               >
-                <ControlLabel>Kennsluvikur: </ControlLabel>
+                <ControlLabel>Vikur: </ControlLabel>
                 <FormControl 
                   componentClass="select" 
                   placeholder={this.state.vikur}
@@ -225,7 +240,7 @@ class CourseForm extends React.Component  {
                   )
                 }
                 </FormControl>
-                <HelpBlock>15 vikur í sýnidæmum</HelpBlock>
+                <HelpBlock>Kennsluvikur</HelpBlock>
               </FormGroup>
             </form>
           </Col>
@@ -308,6 +323,27 @@ class CourseForm extends React.Component  {
               </FormGroup>
             </form>
           </Col>
+          {
+            this.state.synidaemi === 'Raungreinar' && 
+            <Col xs={12} md={1} className="textabox">
+              <form>
+                <FormGroup
+                  controlId="formBasicText"
+                  validationState={this.getValidationSkiptitimar()}
+                >
+                <ControlLabel style={{color: '#3c763d'}}>Skiptitímar</ControlLabel>
+                <FormControl
+                  type="text"
+                  value={this.state.skiptitimar}
+                  placeholder={this.state.skiptitimar}
+                  onChange={this.handleChangeSkiptitimar}
+                />
+                <FormControl.Feedback />
+                <HelpBlock>mínútur á viku</HelpBlock>
+              </FormGroup>
+              </form>
+            </Col>
+          }
           <Col xs={12} md={1} className="textabox">
             <form>
               <ControlLabel style={{color: '#3c763d'}}>Hópar: </ControlLabel>
@@ -316,6 +352,9 @@ class CourseForm extends React.Component  {
               }
             </form>
           </Col>
+          
+
+
         </Row>
         </Grid>
         

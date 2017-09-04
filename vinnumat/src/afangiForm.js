@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/lib/Col';
 import Row from 'react-bootstrap/lib/Row';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
+
 class AfangiForm extends React.Component  {
 
 
@@ -20,7 +21,6 @@ class AfangiForm extends React.Component  {
     
 	render() {
         const tooltip = (<Tooltip id="tooltip"><strong>Eyða</strong></Tooltip>);
-
     	return (
     		<div className="afangiRammi">
                 <OverlayTrigger placement="left" overlay={tooltip} rootClose={true}>
@@ -36,6 +36,10 @@ class AfangiForm extends React.Component  {
     				<ListGroupItem>Lengd kennslustunda: {this.props.afangi.lengdKennslustunda} mín</ListGroupItem>
     				<ListGroupItem>Sýnidæmi: {this.props.afangi.synidaemiHeiti}</ListGroupItem>
     				<ListGroupItem>Kennsluvikur: {this.props.afangi.vikur}</ListGroupItem>
+                    {
+                        this.props.afangi.skiptitimar && <ListGroupItem>Skiptitimar: {this.props.afangi.skiptitimar} mín</ListGroupItem>
+
+                    }
     			 </ListGroup>
     			</Col>
     			<Col xs={12} md={2}>
@@ -82,8 +86,12 @@ class AfangiForm extends React.Component  {
         						<ListGroupItem>Fjöldi: {hopur.fjoldi.toString().replace('.',',')}</ListGroupItem>
     	       					<ListGroupItem>Vinna vegna nemenda: {hopur.vinna_vegna_nemenda.toFixed(1).toString().replace('.',',')} klst.</ListGroupItem>
     			     			<ListGroupItem>Vinnumat: {hopur.vinnumat_skert.toFixed(2).toString().replace('.',',')} klst.</ListGroupItem>		
-        						<ListGroupItem><HlutfallForm hlutfall={hopur.hlutfall} nr={hopur.hopur} changeHlutfall = {this.changeHlutfall} heiti={this.props.afangi.heiti}/></ListGroupItem>
-        					</ListGroup>					
+        						{
+                                    hopur.skiptitimar !== 0 && <ListGroupItem>Skiptitímar: {hopur.skiptitimar.toFixed(1).toString().replace('.',',')} klst.</ListGroupItem>
+                                }
+                                <ListGroupItem><HlutfallForm hlutfall={hopur.hlutfall} nr={hopur.hopur} changeHlutfall = {this.changeHlutfall} heiti={this.props.afangi.heiti}/></ListGroupItem>
+
+                            </ListGroup>					
     					</Col>
     				)
     			}

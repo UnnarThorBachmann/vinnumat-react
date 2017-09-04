@@ -16,6 +16,8 @@ class Afangi {
 		this.stadin_kennsla = 0;
 		this.undirbuningur = 0;
 		this.fastur = 0;
+		this.skiptitimar = info_object.skiptitimar;
+
 	}
 
 	vinna_vegna_nemenda(nemfjoldi) {
@@ -66,6 +68,11 @@ class Afangi {
 		vinnumat_skuggi += this.vinna_vegna_nemenda(medaltal);
 		let n = hopar.length;
 		let skerdingarprosenta;
+
+		if (this.synidaemi.heiti === 'Raungreinar' && this.skiptitimar != '0') {
+				let hf_skiptitimar = 0.625*parseFloat(this.skiptitimar)/(parseFloat(this.kstundirAviku)*parseFloat(this.lengdKennslustunda));
+				vinnumat_skuggi = vinnumat_skuggi + hf_skiptitimar*vinnumat_skuggi;
+		}
 		
 		if (n  <= 3)
 			skerdingarprosenta = 0.08*(n-1)/n;
@@ -83,23 +90,39 @@ class Afangi {
 
 	vinnumat() {
 		
-
 		this.stadin_kennsla = parseFloat(this.vikur*this.kstundirAviku*this.lengdKennslustunda)/parseFloat(60);
+
+
+
 		this.undirbuningur = parseFloat(this.vikur*this.kstundirAviku*this.lengdKennslustunda)/parseFloat(40)*parseFloat(this.synidaemi.undirb_kennslu)/parseFloat(60);
 		this.fastur = this.synidaemi['onnur_vinna'] + this.synidaemi['timar_namsAetlun'] + this.synidaemi['verkefnisgerd'];
+
+		if (this.synidaemi.heiti === 'Raungreinar' && this.skiptitimar != '0') {
+			this.fastur =this.fastur-7.5;
+
+		}
 
 		let vinnumat_hopa = [];
 		let i = 1;
 		for (let fjoldi of this.hopar) {
+			let vinnumat = this.stadin_kennsla + this.undirbuningur + this.fastur + this.vinna_vegna_nemenda(fjoldi);
+			let skiptitimar = 0;
+			if (this.synidaemi.heiti === 'Raungreinar' && this.skiptitimar != '0') {
+				let hf_skiptitimar = 0.625*parseFloat(this.skiptitimar)/(parseFloat(this.kstundirAviku)*parseFloat(this.lengdKennslustunda));
+				skiptitimar = hf_skiptitimar*vinnumat;
+				vinnumat = vinnumat  + skiptitimar;
+				
+			}
 			vinnumat_hopa.push({'hopur': i,
 				'vinna_stadin': this.stadin_kennsla,
 				'vinna_undirbuningur': this.undirbuningur,
 				'vinna_fastur': this.fastur,
 				'vinna_vegna_nemenda': this.vinna_vegna_nemenda(fjoldi),
-				'vinnumat': this.stadin_kennsla + this.undirbuningur + this.fastur + this.vinna_vegna_nemenda(fjoldi),
-				'vinnumat_skert': this.stadin_kennsla + this.undirbuningur + this.fastur + this.vinna_vegna_nemenda(fjoldi),
+				'vinnumat': vinnumat,
+				'vinnumat_skert': vinnumat,
 				'fjoldi': fjoldi,
-				'hlutfall': 100
+				'hlutfall': 100,
+				'skiptitimar': skiptitimar
 			});
 			i += 1;
 		}
@@ -113,7 +136,9 @@ class Afangi {
 		afangi.synidaemiHeiti = this.synidaemi.heiti;
 		
 		afangi.vinnumat_hopa = vinnumat_hopa;
-		console.log(afangi.vinnumat_hopa);
+		if (this.synidaemi.heiti === 'Raungreinar' && this.skiptitimar != '0') {
+			afangi.skiptitimar = this.skiptitimar;
+		}
 
 		return afangi;
 	}

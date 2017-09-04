@@ -95,6 +95,7 @@ class App extends Component {
   		let disabled = false;
   		for (const prop in state) {
   			const val = (prop===changedProp) ? value : state[prop];
+        
 
   			if (prop === 'heiti' && val ==='') {
   				this.setState({disableCourse: true}); 
@@ -113,6 +114,10 @@ class App extends Component {
   				this.setState({disableCourse: true}); 
   				disabled= true;
   			}
+        else if (prop === 'skiptitimar' && (val ==='' || isNaN(val.replace(',','.')))) {
+          this.setState({disableCourse: true}); 
+          disabled= true;
+        }
 
   		}
   		if (changedProp === 'hopar') {
