@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ListGroup from 'react-bootstrap/lib/ListGroup';
 import ListGroupItem from 'react-bootstrap/lib/ListGroupItem';
+import Table from 'react-bootstrap/lib/Table'; 
 import toflur from './launatoflur.js';
 
 class KennariForm extends React.Component  {
@@ -17,7 +18,9 @@ class KennariForm extends React.Component  {
 
     hlutfallAfGrunnlaunum = 0.010385;
 	render() {
-        let vinnuskylda = this.vinnuskylda[this.props.kennari.aldur];
+        let starfshlutfall = parseFloat(this.props.kennari.starfshlutfall)/100;
+        let b_hluti = 180*starfshlutfall;
+        let vinnuskylda = parseFloat(this.vinnuskylda[this.props.kennari.aldur])*starfshlutfall;
         let kennsluafslattur = this.kennsluafslattur.hasOwnProperty(this.props.kennari.aldur) ? this.kennsluafslattur[this.props.kennari.aldur]: 0;
         let cHluti = parseFloat(this.props.kennari.cHluti);
         let vinnuskylda_breytt = (vinnuskylda-cHluti) >= 0 ? (vinnuskylda-cHluti):0;
@@ -35,49 +38,78 @@ class KennariForm extends React.Component  {
         let launastrengur = `(${laun_desember} + ${laun_orlof})/12 +  ${laun_yfirvinna.toFixed(1).toString().replace('.',',')}/6 + ${grunnlaun} = ${heildarlaun.toFixed(1).toString().replace('.',',')} kr.`;
     	return (
     		<div className="kennariRammi">
-    		  <h4>Niðurstaða fyrir eina önn/misseri í fullu starf: </h4>
+    		  <h4>Niðurstaða fyrir {this.props.kennari.starfshlutfall}% starf í eina önn: </h4>
+              <Table responsive>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Vinnumat</th>
+        <th>Vinnuskylda</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>A-hluti</td>
+        <td>
+            {vinnumat_a.toFixed(1).toString().replace('.',',')} klst.
+
+        </td>
+        <td>
+            {vinnuskylda.toFixed(1).toString().replace('.',',')} {kennsluafslattur !== 0 && 
+                    <span>- {((kennsluafslattur*100).toFixed(2)).toString().replace('.',',')}% &times; {vinnuskylda_breytt.toFixed(1).toString().replace('.',',')} = {(vinnuskylda - kennsluafslattur*vinnuskylda_breytt).toFixed(1).toString().replace('.',',')}</span>} klst.
+        </td>
+        
+      </tr>
+      <tr>
+        <td>B-hluti: </td>
+        <td>{b_hluti.toFixed(1).toString().replace('.',',')}</td>
+        <td>{b_hluti.toFixed(1).toString().replace('.',',')}</td>
+        
+      </tr>
+      <tr>
+        <td>C-hluti</td>
+        <td>{this.props.kennari.cHluti} klst.</td>
+        <td>0 klst.</td>
+        
+      </tr>
+      <tr>
+        <td>Samtals</td>
+        <td>{(parseFloat(this.props.kennari.cHluti) + vinnumat_a + b_hluti).toFixed(1).toString().replace('.',',')} klst.</td>
+        <td>{(parseFloat(b_hluti) + parseFloat(vinnuskylda)).toFixed(1).toString().replace('.',',')} klst.</td>
+      </tr>
+      <tr>
+        <td>Mismunur</td>
+        <td>{(parseFloat(this.props.kennari.cHluti) + vinnumat_a-vinnuskylda > 0) && ((parseFloat(this.props.kennari.cHluti) + vinnumat_a-vinnuskylda).toFixed(1).toString().replace('.',',') + " klst.")} </td>
+        <td>{(parseFloat(this.props.kennari.cHluti) + vinnumat_a-vinnuskylda <= 0) && ((parseFloat(this.props.kennari.cHluti) + vinnumat_a-vinnuskylda).toFixed(1).toString().replace('.',',') + " klst.")}</td>
+      </tr>
+      <tr>
+        <td>Yfirvinna</td>
+        <td>{yfirvinna.toFixed(1).toString().replace('.',',') + " klst."} </td>
+        <td></td>
+      </tr>
+    </tbody>
+  </Table>
+    <h5><strong>Nánara yfirlit A-hluta:</strong></h5>
+
+    <ListGroup>
+     {
+        [...this.props.kennari.afangar.values()].map(afangi=> (
+                <ListGroupItem key={afangi.heiti}>{afangi.heiti}, vinnumat: {afangi.vinnumat_hopa.reduce(function(a,b){
+                                        return a + b.vinnumat_skert;
+                },0).toFixed(1).replace('.',',')}
+                            
+                <ul>
+                    {afangi.vinnumat_hopa.length > 1 && afangi.vinnumat_hopa.map(item => (<li key={item.hopur}>Hópur {item.hopur}: {item.vinnumat_skert.toFixed(1).toString().replace('.',',')} klst.</li>))}
+                </ul>
+                            
+                </ListGroupItem>
+                            
+                ))
+
+    }                   
+    </ListGroup>               
 
     		  <div className="nidurstadaKennara">
-                <div className="listarNidurstodurKennarar">
-                 <h5><strong>Vinnumat A-hluta: {vinnumat_a.toFixed(1).toString().replace('.',',')} klst.</strong></h5>
-                     <ListGroup>
-                        {
-                         [...this.props.kennari.afangar.values()].map(afangi=> (
-                            <ListGroupItem key={afangi.heiti}>{afangi.heiti}, vinnumat: {afangi.vinnumat_hopa.reduce(function(a,b){
-                                        return a + b.vinnumat_skert;
-                                    },0).toFixed(1).replace('.',',')}
-                            
-                                <ul>
-                                {afangi.vinnumat_hopa.length > 1 && afangi.vinnumat_hopa.map(item => (<li key={item.hopur}>Hópur {item.hopur}: {item.vinnumat_skert.toFixed(1).toString().replace('.',',')} klst.</li>))}
-                                </ul>
-                            
-                            </ListGroupItem>
-                            
-                         ))
-
-                        }                   
-                    </ListGroup>
-                </div>
-                <div className="listarNidurstodurKennarar">
-                 <h5><strong>Vinnumat B-hluta: 180 klst.</strong></h5>
-                 <ListGroup></ListGroup>
-                </div>
-                <div className="listarNidurstodurKennarar">
-                 <h5><strong>Vinnumat C-hluta: {this.props.kennari.cHluti} klst.</strong></h5>
-                 <ListGroup></ListGroup>
-                </div>
-                <div className="listarNidurstodurKennarar">
-                 <h5><strong>Vinnumat (samtals): {(parseFloat(this.props.kennari.cHluti) + vinnumat_a + 180).toFixed(1).toString().replace('.',',')} klst.</strong></h5>
-                 <ListGroup></ListGroup>
-                </div>
-                <div className="listarNidurstodurKennarar">
-                 <h5><strong>Vinnuskylda (A-hluti): {vinnuskylda} {kennsluafslattur !== 0 && 
-                    <span>- {((kennsluafslattur*100).toFixed(2)).toString().replace('.',',')}% &times; {vinnuskylda_breytt} = {(vinnuskylda - kennsluafslattur*vinnuskylda_breytt).toFixed(1).toString().replace('.',',')}</span>} klst.</strong></h5>
-                </div>
-                <div className="listarNidurstodurKennarar">
-                 <h5><strong>Yfirvinna: {yfirvinna.toFixed(1).toString().replace('.',',')} klst.</strong></h5>
-                </div>
-
     			<div className="listarNidurstodurKennarar">
     			 <h5><strong>Laun:</strong></h5>
     			     <ListGroup>

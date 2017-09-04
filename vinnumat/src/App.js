@@ -19,7 +19,8 @@ class App extends Component {
   						aldur: '30 ára-',
     					cHluti: '0',
     					launaflokkur: '1',
-    					threp: '0'
+    					threp: '0',
+              starfshlutfall:'100'
     				}
   }
   destroy = (heiti) => {
@@ -30,7 +31,8 @@ class App extends Component {
   						  aldur: state.teacher.aldur,
   						  cHluti: state.teacher.cHluti,
   						  launaflokkur: state.teacher.launaflokkur,
-  						  threp: state.teacher.threp
+  						  threp: state.teacher.threp,
+                starfshlutfall: state.teacher.starfshlutfall
   		}};
   	});
 
@@ -47,6 +49,8 @@ class App extends Component {
   		state_changed.teacher['launaflokkur'] = object_changed['launaflokkur'];
   	else if (object_changed.hasOwnProperty('threp'))
   		state_changed.teacher['threp'] = object_changed['threp'];
+    else if (object_changed.hasOwnProperty('starfshlutfall'))
+      state_changed.teacher['starfshlutfall'] = object_changed['starfshlutfall'];
 
   	this.setState((state) => {teacher: state_changed.teacher});
   }
@@ -64,7 +68,8 @@ class App extends Component {
   						  aldur: state.teacher.aldur,
   						  cHluti: state.teacher.cHluti,
   						  launaflokkur: state.teacher.launaflokkur,
-  						  threp: state.teacher.threp
+  						  threp: state.teacher.threp,
+                starfshlutfall: state.teacher.starfshlutfall
   		}};
   	});
 

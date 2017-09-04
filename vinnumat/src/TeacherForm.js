@@ -14,11 +14,121 @@ class TeacherForm extends React.Component  {
 
   launaflokkar = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16']
   threp = ['0','1','2','3','4','5','6','7','8']
+  starfshlutfall = ['100',
+                    '99',
+                    '98',
+                    '97',
+                    '96',
+                    '95',
+                    '94',
+                    '93',
+                    '92',
+                    '91',
+                    '90',
+                    '89',
+                    '88',
+                    '87',
+                    '86',
+                    '85',
+                    '84',
+                    '83',
+                    '82',
+                    '81',
+                    '80',
+                    '79',
+                    '78',
+                    '77',
+                    '76',
+                    '75',
+                    '74',
+                    '73',
+                    '72',
+                    '71',
+                    '70',
+                    '69',
+                    '68',
+                    '67',
+                    '66',
+                    '65',
+                    '64',
+                    '63',
+                    '62',
+                    '61',
+                    '60',
+                    '59',
+                    '58',
+                    '57',
+                    '56',
+                    '55',
+                    '54',
+                    '53',
+                    '52',
+                    '51',
+                    '50',
+                    '49',
+                    '48',
+                    '47',
+                    '46',
+                    '45',
+                    '44',
+                    '43',
+                    '42',
+                    '41',
+                    '40',
+                    '39',
+                    '38',
+                    '37',
+                    '36',
+                    '35',
+                    '34',
+                    '33',
+                    '32',
+                    '31',
+                    '30',
+                    '29',
+                    '28',
+                    '27',
+                    '26',
+                    '25',
+                    '24',
+                    '23',
+                    '22',
+                    '21',
+                    '20',
+                    '19',
+                    '18',
+                    '17',
+                    '16',
+                    '15',
+                    '14',
+                    '13',
+                    '12',
+                    '11',
+                    '10',
+                    '9',
+                    '8',
+                    '7',
+                    '6',
+                    '5',
+                    '4',
+                    '3',
+                    '2',
+                    '1',
+                    '0'
+  ]
+  aldur = ["30 ára-",
+            "30-37 ára", 
+            "38-54 ára",
+            "55-60 ára",
+            "60 ára+",
+            "60 ára+ (17 tímar)"
+  ]
   state = {
     aldur: '30 ára-',
     cHluti: '0',
     launaflokkur: '1',
     threp: '0',
+    starfshlutfall: '100'
   }
 
   handleChangeAldur = (e) => {
@@ -41,6 +151,11 @@ class TeacherForm extends React.Component  {
     this.setState({threp: e.target.value});
     this.props.changeTeacher({'threp': e.target.value});
   }
+  handleChangeStarfshlutfall = (e) => {
+    console.log(e.target.value);
+    this.setState({starfshlutfall: e.target.value});
+    this.props.changeTeacher({'starfshlutfall': e.target.value});
+  }
   
   getValidationCHluti = () => {
     return (isNaN(this.state.cHluti.replace(',','.')) || this.state.cHluti.trim() === '')? 'error': 'success'
@@ -51,7 +166,28 @@ class TeacherForm extends React.Component  {
       <div className="BorderTeacherForm">
       <Grid>
       <Row>
-        <Col xs={12} md={3}>
+        <Col xs={12} md={2}>
+          <form>
+            <FormGroup
+              controlId="formBasicText"
+              validationState='success'
+            >
+              <ControlLabel>Ráðningarhlutfall (%): </ControlLabel>
+              <FormControl 
+                componentClass="select" 
+                placeholder="100"
+                value={this.state.starfshlutfall}
+                onChange={this.handleChangeStarfshlutfall}
+              >
+              {
+                this.starfshlutfall.map((item)=> <option key={item} value={item}>{item}</option>)
+              }
+             
+              </FormControl>
+            </FormGroup>
+          </form>
+        </Col>
+        <Col xs={12} md={2}>
           <form>
             <FormGroup
               controlId="formBasicText"
@@ -64,18 +200,16 @@ class TeacherForm extends React.Component  {
                 value={this.state.aldur}
                 onChange={this.handleChangeAldur}
               >
-                <option value="30 ára-">30 ára-</option>
-                <option value="30-37 ára">30-37 ára</option>
-                <option value="38-54 ára">38-54 ára</option>
-                <option value="55-60 ára">55-60 ára</option>
-                <option value="60 ára+">60 ára+</option>
-                <option value="60 ára+ (17 tímar)">60 ára+ (17 tímar)</option>
+              {
+                this.aldur.map((item)=> <option key={item} value={item}>{item}</option>)
+              }
+             
               </FormControl>
               <HelpBlock>Fyrir rétta vinnuskyldu</HelpBlock>
             </FormGroup>
           </form>
         </Col>
-        <Col xs={12} md={3}>
+        <Col xs={12} md={2}>
           <form>
             <FormGroup
               controlId="formBasicText"
@@ -94,7 +228,7 @@ class TeacherForm extends React.Component  {
           </form>
         </Col>
        
-        <Col xs={12} md={3}>
+        <Col xs={12} md={2}>
 
           <form>
             <FormGroup
@@ -118,7 +252,7 @@ class TeacherForm extends React.Component  {
             </FormGroup>
           </form>
         </Col>
-        <Col xs={12} md={3}>
+        <Col xs={12} md={2}>
           <form>
             <FormGroup
               controlId="formBasicText"
