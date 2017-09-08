@@ -149,13 +149,16 @@ class App extends Component {
   }
   /*<img src={logo} className="App-logo" alt="Image"/>*/
   /*<Icon className='normal' />;*/
+  /*
+  <img src={logo} className="App-logo" alt="Image"/>
+  */
   render() {
     
     return (
      	<div className="App">
     		<div className="App-header">
     			<div className='left'>
-            <img src={logo} className="App-logo" alt="Image"/>
+            
     				<span className="header">Vinnumat</span>
     			</div>
 

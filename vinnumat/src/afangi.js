@@ -134,7 +134,14 @@ class Afangi {
 		afangi.kstundirAviku = this.kstundirAviku; 
 		afangi.lengdKennslustunda = this.lengdKennslustunda; 
 		afangi.synidaemiHeiti = this.synidaemi.heiti;
-		
+		if (this.synidaemi.heiti === 'Raungreinar' && this.skiptitimar != '0') {
+			afangi.onnur_vinna = 0;
+		}
+		else {
+			afangi.onnur_vinna=this.synidaemi['onnur_vinna'];
+		}
+		afangi.namsaetlun = this.synidaemi['timar_namsAetlun'];
+		afangi.verkefnisgerd = this.synidaemi['verkefnisgerd'];
 		afangi.vinnumat_hopa = vinnumat_hopa;
 		if (this.synidaemi.heiti === 'Raungreinar' && this.skiptitimar != '0') {
 			afangi.skiptitimar = this.skiptitimar;

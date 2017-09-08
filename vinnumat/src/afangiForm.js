@@ -42,13 +42,19 @@ class AfangiForm extends React.Component  {
                     }
     			 </ListGroup>
     			</Col>
-    			<Col xs={12} md={2}>
-    			 <h5><strong>Sameiginlegir liðir</strong></h5>
+    			<Col xs={12} md={3}>
+    			 <h5><strong>Sundurliðun vinnumats (stakur hópur)</strong></h5>
     			 <ListGroup>
     				<ListGroupItem>Staðin kennsla: {this.props.afangi.vinnumat_hopa[0].vinna_stadin} klst.</ListGroupItem>
-    				<ListGroupItem>Undirbúningur: {this.props.afangi.vinnumat_hopa[0].vinna_undirbuningur.toString().replace('.',',')} klst.</ListGroupItem>
-    				<ListGroupItem>Fastur hluti: {this.props.afangi.vinnumat_hopa[0].vinna_fastur} klst.</ListGroupItem>
-    				{this.props.afangi.vinnumat_hopa[0].hasOwnProperty('skerding') &&
+    				<ListGroupItem>Undirbúningur kennslu: {this.props.afangi.vinnumat_hopa[0].vinna_undirbuningur.toString().replace('.',',')} klst.</ListGroupItem>
+    				<ListGroupItem>Fastur hluti: {this.props.afangi.vinnumat_hopa[0].vinna_fastur.toFixed(1).toString().replace('.',',')} klst.
+    				<ul>
+                        <li>Námsáætlun: {this.props.afangi.namsaetlun.toFixed(1).toString().replace('.',',')} klst.</li>
+                        <li>Verkefnisgerð: {this.props.afangi.verkefnisgerd.toFixed(1).toString().replace('.',',')} klst.</li>
+                        <li>Önnur vinna {this.props.afangi.onnur_vinna.toFixed(1).toString().replace('.',',')} klst.</li>
+                    </ul>
+                    </ListGroupItem>
+                    {this.props.afangi.vinnumat_hopa[0].hasOwnProperty('skerding') &&
     		    			<ListGroupItem>Skerðing: -{this.props.afangi.vinnumat_hopa[0].skerding.toFixed(1).toString().replace('.',',')} klst. </ListGroupItem>
 					}
 					{this.props.afangi.vinnumat_hopa[0].hasOwnProperty('skerdingarprosenta') &&
@@ -58,26 +64,31 @@ class AfangiForm extends React.Component  {
 
     			 </ListGroup>
     			</Col>
-    			<Col xs={12} md={2}>
-    			 <h5><strong>Samtölur</strong></h5>
-    				<ListGroup>
-					<ListGroupItem>Skerðingar: -{this.props.afangi.vinnumat_hopa.reduce(function(a,b){
-						if (b.hasOwnProperty('skerding'))
-							return a + b.skerding;
-						else
-							return a + 0;
-					},0).toFixed(1).toString().replace('.',',')} klst.
-					</ListGroupItem>
+                {
 
-					<ListGroupItem>Vinnumat: {this.props.afangi.vinnumat_hopa.reduce(function(a,b){
+                    this.props.afangi.vinnumat_hopa.length > 1 && 
+                    <Col xs={12} md={2}>
 
-						return a + b.vinnumat_skert;
-					},0).toFixed(1).toString().replace('.',',')} klst.</ListGroupItem>
+                 <h5><strong>Samtölur</strong></h5>
+                    <ListGroup>
+                    <ListGroupItem>Skerðingar: -{this.props.afangi.vinnumat_hopa.reduce(function(a,b){
+                        if (b.hasOwnProperty('skerding'))
+                            return a + b.skerding;
+                        else
+                            return a + 0;
+                    },0).toFixed(1).toString().replace('.',',')} klst.
+                    </ListGroupItem>
 
-    				</ListGroup>
-    			
-    			</Col>
-    			
+                    <ListGroupItem>Vinnumat: {this.props.afangi.vinnumat_hopa.reduce(function(a,b){
+
+                        return a + b.vinnumat_skert;
+                    },0).toFixed(1).toString().replace('.',',')} klst.</ListGroupItem>
+
+                    </ListGroup>
+                
+                </Col>
+                }
+    						
                 {
     				this.props.afangi.vinnumat_hopa.map((hopur) => 
                         <Col xs={12} md={2} key={hopur.hopur}>
