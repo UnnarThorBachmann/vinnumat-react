@@ -18,27 +18,28 @@ class KennariForm extends React.Component  {
 
     hlutfallAfGrunnlaunum = 0.010385;
 	render() {
-        let starfshlutfall = parseFloat(this.props.kennari.starfshlutfall)/100;
-        let b_hluti = 180*starfshlutfall;
-        let vinnuskylda = parseFloat(this.vinnuskylda[this.props.kennari.aldur])*starfshlutfall;
+       
+        let b_hluti = 180;
+        let vinnuskylda = parseFloat(this.vinnuskylda[this.props.kennari.aldur]);
         let kennsluafslattur = this.kennsluafslattur.hasOwnProperty(this.props.kennari.aldur) ? this.kennsluafslattur[this.props.kennari.aldur]: 0;
         let cHluti = parseFloat(this.props.kennari.cHluti);
         let vinnuskylda_breytt = (vinnuskylda-cHluti) >= 0 ? (vinnuskylda-cHluti):0;
+        /*if (kennsluafslattur != 0) {
+            vinnuskylda_breytt = vinnuskylda_breytt*kennsluafslattur;
+        }*/
         let vinnumat_a = [...this.props.kennari.afangar.values()].reduce(function(a,b){
                     return a + b.vinnumat_hopa.reduce(function(c,d){return c + d.vinnumat_skert},0);
                  },0);
         let yfirvinna = Math.max(vinnumat_a + cHluti -(vinnuskylda-kennsluafslattur*vinnuskylda_breytt),0);
         let grunnlaun = toflur.launatafla[this.props.kennari.launaflokkur][this.props.kennari.threp];
         let laun_yfirvinna = yfirvinna*this.hlutfallAfGrunnlaunum*grunnlaun;
-        let laun_desember = toflur.desemberuppbot['2016']*starfshlutfall;
-        let laun_orlof = toflur.orlofsuppbot['2016']*starfshlutfall;
+        let laun_desember = toflur.desemberuppbot['2016'];
+        let laun_orlof = toflur.orlofsuppbot['2016'];
         let launaflokkur = this.props.kennari.launaflokkur;
         let threp = this.props.kennari.threp;
-        let heildarlaun = (laun_orlof + laun_desember)/12 + laun_yfirvinna/6 + grunnlaun*starfshlutfall;
-        let launastrengur = `(${laun_desember} + ${laun_orlof})/12 +  ${laun_yfirvinna.toFixed(1).toString().replace('.',',')}/6 + ${grunnlaun*starfshlutfall} = ${heildarlaun.toFixed(1).toString().replace('.',',')} kr.`;
-    	/*                        
-            <ListGroupItem>Laun vegna yfirvinnu: {laun_yfirvinna.toFixed(1).toString().replace('.',',')} kr. (100%)</ListGroupItem>
-        */
+        let heildarlaun = (laun_orlof + laun_desember)/12 + laun_yfirvinna/6 + grunnlaun;
+        let launastrengur = `(${laun_desember} + ${laun_orlof})/12 +  ${laun_yfirvinna.toFixed(1).toString().replace('.',',')}/6 + ${grunnlaun} = ${heildarlaun.toFixed(1).toString().replace('.',',')} kr.`;
+    	
 
         return (
     		<div className="kennariRammi">
@@ -66,8 +67,8 @@ class KennariForm extends React.Component  {
       </tr>
       <tr>
         <td>B-hluti: </td>
-        <td>{b_hluti.toFixed(1).toString().replace('.',',')}</td>
-        <td>{b_hluti.toFixed(1).toString().replace('.',',')}</td>
+        <td>{b_hluti.toFixed(1).toString().replace('.',',')} klst.</td>
+        <td>{b_hluti.toFixed(1).toString().replace('.',',')} klst.</td>
         
       </tr>
       <tr>
@@ -79,12 +80,12 @@ class KennariForm extends React.Component  {
       <tr>
         <td>Samtals</td>
         <td>{(parseFloat(this.props.kennari.cHluti) + vinnumat_a + b_hluti).toFixed(1).toString().replace('.',',')} klst.</td>
-        <td>{(parseFloat(b_hluti) + parseFloat(vinnuskylda)).toFixed(1).toString().replace('.',',')} klst.</td>
+        <td>{(parseFloat(b_hluti) + parseFloat(vinnuskylda_breytt*(1-kennsluafslattur))).toFixed(1).toString().replace('.',',')} klst.</td>
       </tr>
       <tr>
         <td>Mismunur</td>
-        <td>{(parseFloat(this.props.kennari.cHluti) + vinnumat_a-vinnuskylda > 0) && ((parseFloat(this.props.kennari.cHluti) + vinnumat_a-vinnuskylda).toFixed(1).toString().replace('.',',') + " klst.")} </td>
-        <td>{(parseFloat(this.props.kennari.cHluti) + vinnumat_a-vinnuskylda <= 0) && ((parseFloat(this.props.kennari.cHluti) + vinnumat_a-vinnuskylda).toFixed(1).toString().replace('.',',') + " klst.")}</td>
+        <td>{(parseFloat(this.props.kennari.cHluti) + vinnumat_a-vinnuskylda_breytt*(1-kennsluafslattur) > 0) && ((parseFloat(this.props.kennari.cHluti) + vinnumat_a-vinnuskylda_breytt*(1-kennsluafslattur)).toFixed(1).toString().replace('.',',') + " klst.")} </td>
+        <td>{(parseFloat(this.props.kennari.cHluti) + vinnumat_a-vinnuskylda_breytt*(1-kennsluafslattur) <= 0) && ((parseFloat(this.props.kennari.cHluti) + vinnumat_a-vinnuskylda_breytt*(1-kennsluafslattur)).toFixed(1).toString().replace('.',',') + " klst.")}</td>
       </tr>
       <tr>
         <td>Yfirvinna</td>
@@ -122,10 +123,10 @@ class KennariForm extends React.Component  {
     			 <h5><strong>Laun:</strong></h5>
     			     <ListGroup>
                         <ListGroupItem>Launaflokkur og þrep: {launaflokkur} og {threp}</ListGroupItem>
-                        <ListGroupItem>Grunnlaun: {parseFloat(grunnlaun*starfshlutfall).toFixed(1).toString().replace('.',',')} kr. á mánuði. (100% starf)</ListGroupItem>
+                        <ListGroupItem>Grunnlaun: {parseFloat(grunnlaun).toFixed(1).toString().replace('.',',')} kr. á mánuði. (100% starf)</ListGroupItem>
                         <ListGroupItem>Desemberuppbot: {laun_desember} kr. á ári (100% starf)</ListGroupItem>
-                        <ListGroupItem>Orlofsuppbot: {laun_orlof} kr. á ári (100% starf)</ListGroupItem>
-                    		         
+                        <ListGroupItem>Orlofsuppbot: {laun_orlof} kr. á ári (100% starf)</ListGroupItem>   	                      
+                        <ListGroupItem>Laun: {launastrengur} kr. (100% starf)</ListGroupItem>
                     </ListGroup>
     		    </div>
                </div>
